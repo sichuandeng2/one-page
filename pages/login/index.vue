@@ -9,16 +9,26 @@
 			<form @submit="formSubmit" @reset="formReset">
 				<!-- 工号 -->
 				<view class="login-form-item ">
-				  <text class="login-form-item-label">工号：</text>
-				  <input name="username" class="put" placeholder="请输入工号" />
+					<view class="login-form-item-label">
+						<text >工号：</text>
+						
+					</view>
+					<!-- <view class="login-form-item-label"> -->
+						<input  class="put" name="username"  placeholder="请输入工号" />
+					<!-- </view> -->
 				</view>
 				<!-- 密码 -->
 				<view class="login-form-item">
-				  <text class="login-form-item-label">密码：</text>
-				  <input  name="password" class="put"  placeholder="请输入密码" password="true" />
+					<view class="login-form-item-label">
+						<text >密码：</text>
+					</view>
+					<!-- <view class="login-form-item-label"> -->
+						<input  name="password" class="put" style="border-color: #2C405A;" placeholder="请输入密码" password="true" />
+					<!-- </view> -->
+				  
 				</view>
 				<view class="login-form-item">
-				  <button form-type="submit" calss="login-form-item-enter" style="width:48%;"><text space="emsp">登  录</text></button>
+				  <button form-type="submit"  style="background-color: #007Acd;" ><text space="emsp">登  录</text></button>
 				</view>
 			</form>
 			
@@ -62,17 +72,17 @@
 					    success: (res) => {
 							if(res.statusCode==200)
 							{
-								// console.log(res.data);
+								console.log(res.data);
 								
 								try {
 								    uni.setStorageSync('userinfo', res.data);
 								} catch (e) {
 								    // error
 								}
-								//登录成功，页面跳转
-								// uni.navigateTo({
-								//     url: '../onepage/home'
-								// });
+								// 登录成功，页面跳转
+								uni.navigateTo({
+								    url: '../onepage/home'
+								});
 							}
 							else{
 								
@@ -103,16 +113,30 @@
 		}
 		.login-form{
 			.login-form-item{
+				display:flex;
+				// justify-content: center;
+				align-items: center;
 				padding:10px 0px;
-				.put{
-						border: solid 1px #999;
-						height:20px;
-						width: 62%;
-					}
-				
+
 				.login-form-item-label{
+					.put{
+						
+							background-color: #F0F0F0;
+							height:20px;
+							width: 62%;
+							
+						}
+						
+					.login-form-item-enter{
+						span{
+							
+						}
+						
+					}
+					// flex-direction: row;
+					
 					//padding-right: 15px;
-					float: left;
+					// float: left;
 				}
 				
 			}

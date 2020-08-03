@@ -24,7 +24,7 @@
 				key: 'userinfo',
 				success: (res) =>{
 					this.user=res.data.username;
-					//console.log(res.data.username);
+					console.log(res.data.username);
 					console.log(this);
 					
 				}
