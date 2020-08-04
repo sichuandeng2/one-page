@@ -2,6 +2,7 @@
 	<view class="login-page">
 		<!-- 头信息 -->
 		<view class="login-header">
+			
 			<view class="welcome">欢迎使用uni-app</view>
 		</view>
 		<!-- 表单 -->
@@ -10,25 +11,24 @@
 				<!-- 工号 -->
 				<view class="login-form-item ">
 					<view class="login-form-item-label">
-						<text >工号：</text>
-						
+						<text >工号</text>
 					</view>
-					<!-- <view class="login-form-item-label"> -->
+					<view class="login-form-item-label">
 						<input  class="put" name="username"  placeholder="请输入工号" />
-					<!-- </view> -->
+					</view>
 				</view>
 				<!-- 密码 -->
 				<view class="login-form-item">
 					<view class="login-form-item-label">
-						<text >密码：</text>
+						<text >密码</text>
 					</view>
-					<!-- <view class="login-form-item-label"> -->
-						<input  name="password" class="put" style="border-color: #2C405A;" placeholder="请输入密码" password="true" />
-					<!-- </view> -->
+					<view class="login-form-item-label">
+						<input  name="password" class="put"  placeholder="请输入密码" password="true" />
+					</view>
 				  
 				</view>
 				<view class="login-form-item">
-				  <button form-type="submit"  style="background-color: #007Acd;" ><text space="emsp">登  录</text></button>
+				  <button form-type="submit"><text space="emsp">登  录</text></button>
 				</view>
 			</form>
 			
@@ -45,17 +45,21 @@
 	            }
 	        },
 	        methods: {
+				
 				// 表单提交
 	            formSubmit: function(e) {
 					// 获取表单信息
 					var formdata = e.detail.value;
 					// var jsonstr =JSON.stringify(formdata);
 					var queststr='?username='+formdata.username+'&password='+formdata.password;
-	                console.log('form发生了submit事件，携带数据为：' + formdata)
+	                console.log('form发生了submit事件，携带数据为：' + formdata);
+					
+					uni.switchTab({
+					    url: '/pages/onepage/home'
+					});
 					// 发起请求
 					uni.request({
 						// url:'https://localhost:44326/Home',
-					    // url: 'https://17931s03c3.iok.la/api/v1/Admin/login'+queststr, //get请求地址。
 						url: 'https://17931s03c3.iok.la/api/v1/Admin/login', //post请求地址。
 						
 						// 请求数据集
@@ -64,6 +68,7 @@
 								password:formdata.password
 					    },
 						method:'POST',
+						
 						// 请求头信息
 					    header: {
 					        // 'content-Type': 'application/x-www-form-urlencoded' ,//请求头信息
@@ -79,13 +84,13 @@
 								} catch (e) {
 								    // error
 								}
+								
 								// 登录成功，页面跳转
-								uni.navigateTo({
-								    url: '../onepage/home'
+								uni.switchTab({
+								    url: '/pages/onepage/home'
 								});
 							}
-							else{
-								
+							else if(res.statusCode===1){
 								uni.showModal({
 								    content: '工号或者密码输入错误',
 								    showCancel: false
@@ -93,8 +98,9 @@
 							}
 					       
 					    }
+						
 					});
-	            },
+	            }
 	        
 	        }
 	    }
@@ -104,44 +110,31 @@
 	.login-page{
 		text-align: left;
 		margin:50px auto;
-		padding-left: 20px;
 		width: 80%;
-		border:#007AFF;
+		
 		.login-header{
-			margin-top: 38%;
-			padding: 20px 0px;;
+			padding: 18px 0px;;
 		}
 		.login-form{
 			.login-form-item{
-				display:flex;
+				// display:flex;
 				// justify-content: center;
-				align-items: center;
+				// align-items: center;
 				padding:10px 0px;
-
+				button{
+					width: 150px;
+					background-color: #0083f1;
+				}
 				.login-form-item-label{
 					.put{
-						
-							background-color: #F0F0F0;
-							height:20px;
-							width: 62%;
-							
+						background-color: rgb(255,255,255);
+							border-bottom:1px solid #000000;
+							height:35px;
 						}
-						
-					.login-form-item-enter{
-						span{
-							
-						}
-						
-					}
-					// flex-direction: row;
-					
-					//padding-right: 15px;
-					// float: left;
 				}
 				
 			}
 		}
 	}
-	/* @import url("/pages/style/main.css"); */
 	
 </style>

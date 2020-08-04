@@ -1,43 +1,57 @@
 {
 	"pages": [
 		{
-			"path":"pages/login/index",
-			"style":{
-				"navigationBarBackgroundColor": "#ffffff"
+			"path": "pages/login/index",
+			"style": {
+				"navigationBarTitleText": "",
+				"navigationBarBackgroundColor": "#FFFFFF"
 			}
+		},
+		{
+			"path":"pages/index/index",
+			"style":{
+				"navigationBarBackgroundColor": "#ff00ff"
+			}
+		},
+		{
+			"path":"pages/onepage/test"
 		},
 		{
 			"path":"pages/onepage/home"
 		},
 		{
-			"path": "pages/index/index",
-			"style": {
-				"navigationBarTitleText": "uni-ui基础项目"
-			}
+			"path":"pages/onepage/about"
+		},
+		{
+			"path": "pages/index/test"
 		}
+		
+		
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "white",
+		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#007AFF",
+		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#FFFFFF"
 	},
 	"tabBar": {
 	    "color": "#7A7E83",
 	    "selectedColor": "#3cc51f",
 	    "borderStyle": "black",
-	    "backgroundColor": "#123",
+	    "backgroundColor": "#FFFFFF",
 	    "list": [{
-	        "pagePath": "pages/component/index",
-	        "iconPath": "static/image/icon_component.png",
-	        "selectedIconPath": "static/image/icon_component_HL.png",
-	        "text": "组件"
-	    }, {
-	        "pagePath": "pages/API/index",
-	        "iconPath": "static/image/icon_API.png",
-	        "selectedIconPath": "static/image/icon_API_HL.png",
-	        "text": "接口"
-	    }]
+	       "pagePath": "pages/onepage/about",
+	       "text": "关于"
+	    }, 
+		{
+			"pagePath": "pages/onepage/home",
+			"text": "Home"
+	    },
+		{
+			"pagePath": "pages/onepage/test",
+			"text": "测试页"
+		}
+		]
 	}
 	
 }
