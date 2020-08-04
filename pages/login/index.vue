@@ -123,7 +123,7 @@
 				padding:10px 0px;
 				button{
 					width: 150px;
-					background-color: #0083f1;
+					background-color: rgb(50,178,218);
 				}
 				.login-form-item-label{
 					.put{
