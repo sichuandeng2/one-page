@@ -23,7 +23,7 @@
 			"path":"pages/onepage/home"
 		},
 		{
-			"path":"pages/onepage/about"
+			"path":"pages/onepage/clock"
 		},
 		{
 			"path": "pages/index/test"
@@ -32,10 +32,7 @@
 		
 	],
 	"globalStyle": {
-		"navigationBarTextStyle": "black",
-		"navigationBarTitleText": "uni-app",
-		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#FFFFFF"
+		"navigationStyle":"custom"
 	},
 	"tabBar": {
 	    "color": "#7A7E83",
@@ -43,24 +40,22 @@
 	    "borderStyle": "black",
 	    "backgroundColor": "#FFFFFF",
 	    "list": [{
-	       "pagePath": "pages/onepage/about",
+	       "pagePath": "pages/onepage/clock",
 	       "text": "打卡",
 		   "iconPath":"static/icon/myicon1.ico",
-		   "selectedIconPath":"static/icon/myicon1.ico"
-		   
+		   "selectedIconPath":"static/icon/myicon4.ico"
 	    }, 
 		{
 			"pagePath": "pages/onepage/home",
 			"text": "统计",
 			"iconPath":"static/icon/myicon2.ico",
-			"selectedIconPath":"static/icon/myicon2.ico"
-			
+			"selectedIconPath":"static/icon/myicon5.ico"
 	    },
 		{
 			"pagePath": "pages/onepage/set",
 			"text": "设置",
 			"iconPath":"static/icon/myicon3.ico",
-			"selectedIconPath":"static/icon/myicon3.ico"
+			"selectedIconPath":"static/icon/myicon6.ico"
 		}
 		]
 	}

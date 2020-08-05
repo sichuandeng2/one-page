@@ -59,7 +59,7 @@
 					uni.switchTab({
 					    url: '/pages/onepage/home'
 					});
-					发起请求
+					// 发起请求
 					uni.request({
 						// url:'https://localhost:44326/Home',
 						// url: 'https://17931s03c3.iok.la/api/v1/login/login', //post请求地址。
