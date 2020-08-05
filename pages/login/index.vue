@@ -50,49 +50,63 @@
 	            formSubmit: function(e) {
 					// 获取表单信息
 					var formdata = e.detail.value;
-					// var jsonstr =JSON.stringify(formdata);
-					var queststr='?username='+formdata.username+'&password='+formdata.password;
+					var user= {username:formdata.username}
+					var jsonstr =JSON.stringify(user);
+					
+					// var queststr='?username='+formdata.username+'&password='+formdata.password;
 	                console.log('form发生了submit事件，携带数据为：' + formdata);
 					
 					uni.switchTab({
 					    url: '/pages/onepage/home'
 					});
-					// 发起请求
+					发起请求
 					uni.request({
 						// url:'https://localhost:44326/Home',
-						url: 'https://17931s03c3.iok.la/api/v1/Admin/login', //post请求地址。
+						// url: 'https://17931s03c3.iok.la/api/v1/login/login', //post请求地址。
+						// url: 'http://www.test.testbcxg.cn/api/v1/login/login?username=100051&password=111111', //post请求地址。
+						url: 'http://www.test.testbcxg.cn/api/v1/login/login'
 						
 						// 请求数据集
-					    data: {
+					    ,data: {
 								username:formdata.username,
 								password:formdata.password
 					    },
 						method:'POST',
 						
-						// 请求头信息
+						// // 请求头信息
 					    header: {
-					        // 'content-Type': 'application/x-www-form-urlencoded' ,//请求头信息
-							'Content-Type':'application/json'
+					        'content-Type': 'application/x-www-form-urlencoded' ,//请求头信息
+							//'Content-Type':'application/json'
 					    },
 					    success: (res) => {
-							if(res.statusCode==200)
+							//遍历数据集
+							for (var i in res){
+								console.log(res.i);
+							}
+							
+							//登录正常
+							if(res.code===0)
 							{
-								console.log(res.data);
-								
+								console.log(登录正常);
+								// 保存数据
 								try {
 								    uni.setStorageSync('userinfo', res.data);
 								} catch (e) {
-								    // error
+								    uni.showModal({
+								        content: '连接失败',
+								        showCancel: false
+								    });
 								}
 								
-								// 登录成功，页面跳转
+								// 页面跳转
 								uni.switchTab({
 								    url: '/pages/onepage/home'
 								});
 							}
-							else if(res.statusCode===1){
+							//用户信息错误
+							else if(res.code===1){
 								uni.showModal({
-								    content: '工号或者密码输入错误',
+								    content: res.msg,
 								    showCancel: false
 								});
 							}

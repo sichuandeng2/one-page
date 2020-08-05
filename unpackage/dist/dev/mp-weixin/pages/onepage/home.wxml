@@ -1,1 +1,0 @@
-<view class="home-page"><view class="home-page-heder"><view class="home-page-header-title">主页</view></view><view class="home-page-body"><text>登录的员工为：</text><text class="home-page-body-text">{{user}}</text></view></view>

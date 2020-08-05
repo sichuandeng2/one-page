@@ -14,7 +14,10 @@
 			}
 		},
 		{
-			"path":"pages/onepage/test"
+			"path":"pages/onepage/set",
+			"styel":{
+				
+			}
 		},
 		{
 			"path":"pages/onepage/home"
@@ -41,15 +44,23 @@
 	    "backgroundColor": "#FFFFFF",
 	    "list": [{
 	       "pagePath": "pages/onepage/about",
-	       "text": "关于"
+	       "text": "打卡",
+		   "iconPath":"static/icon/myicon1.ico",
+		   "selectedIconPath":"static/icon/myicon1.ico"
+		   
 	    }, 
 		{
 			"pagePath": "pages/onepage/home",
-			"text": "Home"
+			"text": "统计",
+			"iconPath":"static/icon/myicon2.ico",
+			"selectedIconPath":"static/icon/myicon2.ico"
+			
 	    },
 		{
-			"pagePath": "pages/onepage/test",
-			"text": "测试页"
+			"pagePath": "pages/onepage/set",
+			"text": "设置",
+			"iconPath":"static/icon/myicon3.ico",
+			"selectedIconPath":"static/icon/myicon3.ico"
 		}
 		]
 	}
