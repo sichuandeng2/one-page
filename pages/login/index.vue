@@ -50,9 +50,6 @@
 	            formSubmit: function(e) {
 					// 获取表单信息
 					var formdata = e.detail.value;
-					var user= {username:formdata.username}
-					var jsonstr =JSON.stringify(user);
-					
 					// var queststr='?username='+formdata.username+'&password='+formdata.password;
 	                console.log('form发生了submit事件，携带数据为：' + formdata);
 					

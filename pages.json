@@ -16,7 +16,6 @@
 		{
 			"path":"pages/onepage/set",
 			"styel":{
-				
 			}
 		},
 		{
@@ -27,6 +26,9 @@
 		},
 		{
 			"path": "pages/index/test"
+		},
+		{
+			"path": "pages/components/headComp"
 		}
 		
 		
@@ -36,7 +38,7 @@
 	},
 	"tabBar": {
 	    "color": "#7A7E83",
-	    "selectedColor": "#3cc51f",
+	    "selectedColor": "rgb(50,178,218)",
 	    "borderStyle": "black",
 	    "backgroundColor": "#FFFFFF",
 	    "list": [{
