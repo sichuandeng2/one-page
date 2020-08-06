@@ -5,12 +5,12 @@
 		</view>
 		<view class="page-right">
 			<view class="page-right-help">
-				<uniIcons type="help" size="30"></uniIcons>
+				<uniIcons type="help" size="20"></uniIcons>
 			</view>
 			<view class="page-right-more">
-				<uniIcons type="more-filled" size="30"></uniIcons>
+				<uniIcons type="more-filled" size="20"></uniIcons>
 				<text>|</text>
-				<uniIcons type="close" size="30">...</uniIcons>
+				<uniIcons type="close" size="20">...</uniIcons>
 			</view>
 		</view>
 	</view>

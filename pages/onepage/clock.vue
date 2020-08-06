@@ -4,12 +4,13 @@
 		<view class="page-info">
 			<view class="page-info-circle">
 				<image src="../../static/image/blackimage.gif"></image>
-				<text class="page-info-circle-text">{{name}}</text>
+				
 			</view>
 			<view class="page-info-attence">
 				<view><text>{{name}}</text></view>
 				<view><text>考勤</text><uniIcons type="arrowright" size="15"></uniIcons></view>
 			</view>
+			<text class="page-info-circle-text">{{name}}</text>
 		</view>
 		<view class="page-clock">
 			<view class="page-clock-schedule">
@@ -35,7 +36,7 @@
 </template>
 
 <script>
-	import headcomp from "../components/headComp.vue"; //引用插槽
+	import headcomp from "../components/headComp.vue"; //引用头插槽
 	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
 	export default {
 			components:{
@@ -53,16 +54,12 @@
 
 <style lang="scss">
 	.clock-page{
-	
 		background-color: #F5F5F5;
-		// height: 100%;
 		.page-info{
-			
 			margin: 38rpx auto;
 			height: 120rpx;
 			width:674rpx;
 			background-color: #FFFFFF;
-		
 			display: flex;
 			flex-direction: flex-start;
 			.page-info-attence{
@@ -70,27 +67,22 @@
 				font-size: 28rpx;
 			}
 			.page-info-circle{
-				
 				padding: 20rpx;
 				image{
 					width: 85rpx;
 					height: 85rpx;
 				}
-				.page-info-circle-text{
-					font-size: 32rpx;
-					color: #FFFFFF;
-				
-					position: relative;
-					left: -70rpx;
-					top: -30rpx;
-						
-				}	
-				
 			}
+			.page-info-circle-text{
+				font-size: 32rpx;
+				color: #FFFFFF;
+				position: relative;
+				left: -212rpx;
+				top: 40rpx;
+			}	
 		}
 		.page-clock{
 			margin: 38rpx auto;
-			// height: 500rpx;
 			padding: 8rpx;
 			width:674rpx;
 			background-color: #FFFFFF;
@@ -109,7 +101,6 @@
 				.page-clock-clock-text{
 					position: relative;
 					top:-240rpx;
-					
 					.page-clock-clock-text-title{
 						color: #FFFFFF;
 						font-size: 68rpx;

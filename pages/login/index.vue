@@ -38,6 +38,7 @@
 </template>
 
 <script>
+	import seter from "../config.js";
 	 export default {
 	        data() {
 	            return {
@@ -50,7 +51,6 @@
 	            formSubmit: function(e) {
 					// 获取表单信息
 					var formdata = e.detail.value;
-					// var queststr='?username='+formdata.username+'&password='+formdata.password;
 	                console.log('form发生了submit事件，携带数据为：' + formdata);
 					
 					uni.switchTab({
@@ -58,10 +58,7 @@
 					});
 					// 发起请求
 					uni.request({
-						// url:'https://localhost:44326/Home',
-						// url: 'https://17931s03c3.iok.la/api/v1/login/login', //post请求地址。
-						// url: 'http://www.test.testbcxg.cn/api/v1/login/login?username=100051&password=111111', //post请求地址。
-						url: 'http://www.test.testbcxg.cn/api/v1/login/login'
+						url: seter.websiteUrl+'/api/v1/login/login'
 						
 						// 请求数据集
 					    ,data: {
@@ -70,7 +67,7 @@
 					    },
 						method:'POST',
 						
-						// // 请求头信息
+						// 请求头信息
 					    header: {
 					        'content-Type': 'application/x-www-form-urlencoded' ,//请求头信息
 							//'Content-Type':'application/json'
@@ -128,9 +125,6 @@
 		}
 		.login-form{
 			.login-form-item{
-				// display:flex;
-				// justify-content: center;
-				// align-items: center;
 				padding:10px 0px;
 				button{
 					width: 150px;

@@ -31,8 +31,17 @@
 					<text>每日记录</text>
 					<text class="record-title-item" >(8月)</text>
 				</view>
-				<view>
-					
+				<view class="record-week">
+					<week></week>
+					<!-- <view>
+					    <uni-calendar 
+					    :insert="true"
+					    :lunar="true" 
+					    :start-date="'2020-8-2'"
+					    :end-date="'2020-8-8'"
+					    @change="change"
+					     />
+					</view> -->
 				</view>
 			</view>
 			<!-- <text >登录的员工为：</text><text class="home-page-body-text" v-text="user"></text> -->
@@ -43,10 +52,14 @@
 <script>
 	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
 	import headcomp from "../components/headComp.vue"; //引用插槽
+	import uniCalendar from "../../components/uni-calendar/uni-calendar.vue";
+	import week from "../components/week.vue";
 	export default {
 			components:{
 				headcomp,
-				uniIcons
+				uniIcons,
+				uniCalendar,
+				week
 			},
 	       data() {
 	           return {
@@ -60,7 +73,6 @@
 					this.user=res.data.username;
 					console.log(res.data.username);
 					console.log(this);
-					
 				}
 			   });
 		   },

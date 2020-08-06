@@ -1,4 +1,5 @@
 <script>
+	
 export default {
 	onLaunch: function() {
 		console.log('App Launch');
@@ -13,6 +14,9 @@ export default {
 </script>
 
 <style>
+	page{
+		background-color: #F5F5F5;
+	}
 	/* @import url("~@/pages/style/main.css"); */
 /* 解决头条小程序组件内引入字体不生效的问题 */
 /* #ifdef MP-TOUTIAO */

@@ -1,35 +1,23 @@
 {
 	"pages": [
 		{
-			"path": "pages/login/index",
-			"style": {
-				"navigationBarTitleText": "",
-				"navigationBarBackgroundColor": "#FFFFFF"
-			}
+			"path": "pages/login/index"
 		},
 		{
 			"path":"pages/index/index",
 			"style":{
 				"backgroundColor":" #F5F5F5"
 			}
+			
 		},
 		{
-			"path":"pages/onepage/set",
-			"style":{
-				"backgroundColor":" #F5F5F5"
-			}
+			"path":"pages/onepage/set"
 		},
 		{
-			"path":"pages/onepage/home",
-			"style":{
-				"backgroundColor":" #F5F5F5"
-			}
+			"path":"pages/onepage/home"
 		},
 		{
-			"path":"pages/onepage/clock",
-			"style":{
-				"backgroundColor":" #F5F5F5"
-			}
+			"path":"pages/onepage/clock"
 		},
 		{
 			"path": "pages/index/test"
@@ -37,12 +25,9 @@
 		{
 			"path": "pages/components/headComp"
 		}
-		
-		
 	],
 	"globalStyle": {
-		"navigationStyle":"custom",
-		"backgroundColor":" #F5F5F5"
+		"navigationStyle":"custom"
 	},
 	"tabBar": {
 	    "color": "#7A7E83",
@@ -69,5 +54,4 @@
 		}
 		]
 	}
-	
 }
