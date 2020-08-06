@@ -3,7 +3,8 @@
 		<headcomp title="打卡"></headcomp>
 		<view class="page-info">
 			<view class="page-info-circle">
-				<uniIcons type="circle" size="60"></uniIcons>
+				<image src="../../static/image/blackimage.gif"></image>
+				<text class="page-info-circle-text">{{name}}</text>
 			</view>
 			<view class="page-info-attence">
 				<view><text>{{name}}</text></view>
@@ -11,6 +12,23 @@
 			</view>
 		</view>
 		<view class="page-clock">
+			<view class="page-clock-schedule">
+				<text>今日未排班</text>
+			</view>
+			<view class="page-clock-clock">
+				<image src="../../static/image/blackimage.gif"></image>
+				<view class="page-clock-clock-text">
+					<view class="page-clock-clock-text-title">
+						<text>打卡</text>
+					</view>
+					<view class="page-clock-clock-text-info">
+						<text>{{name}}</text>
+					</view>
+					
+				</view>
+				
+			</view>
+			
 			
 		</view>
 	</view>
@@ -35,32 +53,74 @@
 
 <style lang="scss">
 	.clock-page{
+	
 		background-color: #F5F5F5;
-		height: 100%;
+		// height: 100%;
 		.page-info{
+			
 			margin: 38rpx auto;
 			height: 120rpx;
 			width:674rpx;
 			background-color: #FFFFFF;
-			border-radius: 25rpx;
-			display: inline-flex;
+		
+			display: flex;
+			flex-direction: flex-start;
 			.page-info-attence{
-				line-height: 50rpx;
+				padding: 20rpx;
 				font-size: 28rpx;
 			}
 			.page-info-circle{
 				
-					color: #007AFF;
+				padding: 20rpx;
+				image{
+					width: 85rpx;
+					height: 85rpx;
+				}
+				.page-info-circle-text{
+					font-size: 32rpx;
+					color: #FFFFFF;
 				
+					position: relative;
+					left: -70rpx;
+					top: -30rpx;
+						
+				}	
 				
 			}
 		}
 		.page-clock{
 			margin: 38rpx auto;
-			height: 500rpx;
+			// height: 500rpx;
+			padding: 8rpx;
 			width:674rpx;
 			background-color: #FFFFFF;
 			border-radius: 25rpx;
+			text-align:center;
+			.page-clock-schedule{
+				margin: 50rpx;
+				padding: 50rpx;
+			}
+			.page-clock-clock{
+				padding: 58rpx;
+				image{
+					width: 320rpx;
+					height: 320rpx;
+				}
+				.page-clock-clock-text{
+					position: relative;
+					top:-240rpx;
+					
+					.page-clock-clock-text-title{
+						color: #FFFFFF;
+						font-size: 68rpx;
+					}
+					.page-clock-clock-text-info{
+						color:#DDDDDD
+					}
+				}
+		
+			}
+			
 		}
 	}
 </style>
