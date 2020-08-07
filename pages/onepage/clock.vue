@@ -17,7 +17,11 @@
 				<text>今日未排班</text>
 			</view>
 			<view class="page-clock-clock">
-				<image src="../../static/image/blackimage.gif"></image>
+				<view style="width: 300rpx;height: 300rpx;background: red;margin: 0 auto;border-radius: 50%;">
+					<view style="color: #fff;padding-top: 100rpx;">打卡</view>
+					<view style="color: #fff;font-size: 28rpx;padding-top: 20rpx;">22:24:00</view>
+				</view>
+				<!-- <image src="../../static/image/blackimage.gif"></image>
 				<view class="page-clock-clock-text">
 					<view class="page-clock-clock-text-title">
 						<text>打卡</text>
@@ -26,7 +30,7 @@
 						<text>{{name}}</text>
 					</view>
 					
-				</view>
+				</view> -->
 				
 			</view>
 			
