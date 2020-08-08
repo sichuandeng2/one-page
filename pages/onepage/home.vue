@@ -1,13 +1,12 @@
 <template>
 	<view class="page">
 		<view class="home-page-heder">
-			<headcomp title="统计"></headcomp>
 		</view>
 		<view class="home-page-body">
 			<!-- 打卡统计 -->
 			<view class="count">
 				<view class="count-title">
-					<text>8月汇总</text>
+					<text>{{month}}月汇总</text>
 					<uniIcons type="arrowright" size="25"></uniIcons>
 					</view>
 				<view class="count-holder">
@@ -31,42 +30,76 @@
 					<text>每日记录</text>
 					<text class="record-title-item" >(8月)</text>
 				</view>
-				<view class="record-week">
-					<week></week>
-					<!-- <view>
+					<view>
 					    <uni-calendar 
 					    :insert="true"
-					    :lunar="true" 
-					    :start-date="'2020-8-2'"
-					    :end-date="'2020-8-8'"
+					    :showMonth = "false"
+					    :start-date=startdate
+					    :end-date=enddate
 					    @change="change"
 					     />
-					</view> -->
+					</view>
 				</view>
 			</view>
-			<!-- <text >登录的员工为：</text><text class="home-page-body-text" v-text="user"></text> -->
 		</view>
 	</view>
 </template>
 
 <script>
 	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
-	import headcomp from "../components/headComp.vue"; //引用插槽
 	import uniCalendar from "../../components/uni-calendar/uni-calendar.vue";
-	import week from "../components/week.vue";
 	export default {
 			components:{
-				headcomp,
 				uniIcons,
 				uniCalendar,
-				week
+				
 			},
 	       data() {
 	           return {
-					user:{}	
+					user:{},
+					startdate:null,
+					enddate:null,
+					month:null
+				}
+			},
+			methods:{
+				change(){
+					
 				}
 			},
 		   mounted() {
+			   
+			   //获取月历的开始和结束日期
+			   var now = new Date();
+			   var year = now.getFullYear();
+			   var month = now.getMonth()+1;
+			   var day = now.getDate();
+			   var lmon = [1,3,5,7,8,10,12];
+			   var smon = [4,6,9,11];
+				var endday =28;
+				if(month==2)
+				{
+					if(year%4===0&&year%100!==0||year%400===0)
+					endday=29;
+					else{
+						endday=28;
+					}
+				}
+				else{
+					lmon.forEach((i)=>{
+							if(i===month) endday=31;
+						})
+						smon.forEach((i)=>{
+							if(i===month) endday=30;
+						})
+					
+				}
+				this.month=month;
+				this.startdate = year +'-' +month+'-' +"1";
+				this.enddate = year + '-'+month+'-'+endday;
+				
+			
+			   //加载登录数据
 			   uni.getStorage({
 				key: 'userinfo',
 				success: (res) =>{
@@ -111,7 +144,7 @@
 						text-align: center;
 						.count-holder-item-text{
 							padding-top: 5rpx;
-							font-size: 30rpx;
+							font-size: 26rpx;
 						}
 						
 						

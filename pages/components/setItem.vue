@@ -48,8 +48,8 @@
 		background-color: #FFFFFF;
 		display:inline-flex;
 		justify-content: space-between;
-		border-radius: 35rpx;
-		margin: 15rpx 15rpx;
+		border-radius: 25rpx;
+		margin: 30rpx 15rpx 0rpx 15rpx;
 		.page-left{
 			padding-left: 30rpx;
 			.page-left-title{

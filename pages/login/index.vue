@@ -1,10 +1,12 @@
 <template>
 	<view class="login-page">
+		
 		<!-- 头信息 -->
 		<view class="login-header">
-			
+			<view class="login-header-icon">{{userName}} </view>
 			<view class="welcome">欢迎使用uni-app</view>
 		</view>
+		
 		<!-- 表单 -->
 		<view class="login-form">
 			<form @submit="formSubmit" @reset="formReset">
@@ -28,11 +30,15 @@
 				  
 				</view>
 				<view class="login-form-item">
-				  <button form-type="submit"><text space="emsp">登  录</text></button>
+				  <button form-type="submit">登录</button>
 				</view>
 			</form>
-			
+			<view class="login-form-repwd"><text>忘记密码</text></view>
 		</view>
+		
+		<view>快捷登录</view>
+		<view>注册密码</view>
+		
 	</view>
 	
 </template>
@@ -42,7 +48,7 @@
 	 export default {
 	        data() {
 	            return {
-					
+					userName:"管理员"
 	            }
 	        },
 	        methods: {
@@ -52,7 +58,6 @@
 					// 获取表单信息
 					var formdata = e.detail.value;
 	                console.log('form发生了submit事件，携带数据为：' + formdata);
-					
 					uni.switchTab({
 					    url: '/pages/onepage/home'
 					});
@@ -91,7 +96,6 @@
 								        showCancel: false
 								    });
 								}
-								
 								// 页面跳转
 								uni.switchTab({
 								    url: '/pages/onepage/home'
@@ -115,31 +119,53 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: #FFFFFF;
+	}
 	.login-page{
-		text-align: left;
-		margin:50px auto;
-		width: 80%;
-		
+		width: 510rpx;
+		margin: 0 auto;
 		.login-header{
-			padding: 18px 0px;;
+			height: 190rpx;
+			padding: 18rpx 0rpx;
+			margin-bottom: 50rpx;
+			margin-top:38rpx;
+			.login-header-icon{
+				width:128rpx;
+				height:128rpx;
+				border-radius: 50%;
+				background-color:rgb(0,157,254);
+				color: #FFFFFF;
+				font-size: 32rpx;
+				text-align: center;
+				line-height: 128rpx;
+				margin-bottom:38rpx;
+			}
 		}
 		.login-form{
 			.login-form-item{
 				padding:10px 0px;
 				button{
-					width: 150px;
-					background-color: rgb(50,178,218);
+					background-color: rgb(152,208,255);
+					border-radius: 25rpx;
+					font-size: 36rpx;
 				}
 				.login-form-item-label{
+					font-size: 28rpx;
 					.put{
-						background-color: rgb(255,255,255);
+							background-color: rgb(255,255,255);
 							border-bottom:1px solid #000000;
 							height:35px;
+							font-size: 36rpx;
 						}
 				}
 				
 			}
+			.login-form-repwd{
+				font-size: 28rpx;
+			}
 		}
+		
 	}
 	
 </style>

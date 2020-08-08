@@ -1,7 +1,15 @@
 {
 	"pages": [
+		// {
+		// 	"path": "pages/index/test"
+		// },
 		{
-			"path": "pages/login/index"
+			"path": "pages/login/index",
+			"style":{
+				"navigationBarTitleText":"",
+				"backgroundColor":"#FFFFFF"
+			
+			}
 		},
 		{
 			"path":"pages/index/index",
@@ -11,23 +19,34 @@
 			
 		},
 		{
-			"path":"pages/onepage/set"
+			"path":"pages/onepage/set",
+			"style":{
+				"navigationBarTitleText":"设置"
+			}
 		},
 		{
-			"path":"pages/onepage/home"
+			"path":"pages/onepage/home",
+			"style":{
+				"navigationBarTitleText":"统计"
+			}
 		},
 		{
-			"path":"pages/onepage/clock"
+			"path":"pages/onepage/clock",
+			"style":{
+				"navigationBarTitleText":"打卡"
+			}
 		},
-		{
-			"path": "pages/index/test"
-		},
+		
 		{
 			"path": "pages/components/headComp"
 		}
 	],
 	"globalStyle": {
-		"navigationStyle":"custom"
+		"navigationStyle":"default",
+		"navigationBarTitleText":"uni-app",
+		"navigationBarBackgroundColor":"#FFFFFF",
+		"navigationBarTextStyle":"black"
+		
 	},
 	"tabBar": {
 	    "color": "#7A7E83",
