@@ -19,8 +19,9 @@
 			<view>
 			<view class="page-clock-clock">
 					<view class="page-clock-clock-title">打卡</view>
-					<view class="page-clock-clock-text">22:24:00</view>		
+					<view class="page-clock-clock-text">{{now}}</view>		
 			</view>
+			<veiw>地址：{{addres}}</veiw>
 			</view>
 		</view>
 	</view>
@@ -35,8 +36,52 @@
 			},
 			data(){
 				return{
-					name:"test"
-				}
+					name:"test",
+					now:null,
+					addres:""
+					}
+				
+			},
+			methods:{
+			
+			},
+			onLoad() {
+				var interval = setInterval(() => {
+					var date = new Date();
+					var hour = date.getHours();
+					var minute = date.getMinutes();
+					var  second=date.getSeconds();
+					hour<=9?hour= "0"+hour:hour;
+					minute<=9?minute= "0"+minute:minute;
+					second<=9?second= "0"+second:second;
+					this.now=hour+":"+minute+":"+second;
+				}, 1000)
+		
+			
+				
+			},
+			onShow() {
+				
+				
+				
+			},
+			mounted() {
+				uni.getLocation({
+				    type: 'wgs84',
+					geocode:true,
+				    success: function (res) {
+						this.addres=address.street;
+				        // console.log('当前位置的经度：' + res.longitude);
+				        // console.log('当前位置的纬度：' + res.latitude);
+						uni.showModal({
+							content:res.longitude
+							,showCancel: false
+						})
+				    }
+				});
+			},
+			onHide() {
+			
 			}
 		}
 </script>
