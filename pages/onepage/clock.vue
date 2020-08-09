@@ -21,7 +21,7 @@
 					<view class="page-clock-clock-title">打卡</view>
 					<view class="page-clock-clock-text">{{now}}</view>		
 			</view>
-			<veiw>地址：{{addres}}</veiw>
+			<view>地址：{{addres}}</view>
 			</view>
 		</view>
 	</view>
@@ -56,20 +56,14 @@
 					second<=9?second= "0"+second:second;
 					this.now=hour+":"+minute+":"+second;
 				}, 1000)
-		
-			
-				
 			},
-			onShow() {
-				
-				
-				
-			},
+	
 			mounted() {
 				uni.getLocation({
 				    type: 'wgs84',
 					geocode:true,
 				    success: function (res) {
+						console.log(address);
 						this.addres=address.street;
 				        // console.log('当前位置的经度：' + res.longitude);
 				        // console.log('当前位置的纬度：' + res.latitude);
@@ -77,12 +71,14 @@
 							content:res.longitude
 							,showCancel: false
 						})
-				    }
+				    },
+					fail:function (res){
+						console.log("错误返回"+res);
+					}
 				});
-			},
-			onHide() {
-			
+				
 			}
+		
 		}
 </script>
 
@@ -141,7 +137,7 @@
 				}
 				.page-clock-clock-text{
 					color: #fff;
-					font-size: 28rpx;
+					font-size: 24rpx;
 					padding-top: 20rpx;
 				}
 			}

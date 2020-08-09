@@ -10,6 +10,7 @@
 		<!-- 表单 -->
 		<view class="login-form">
 			<form @submit="formSubmit" @reset="formReset">
+				
 				<!-- 工号 -->
 				<view class="login-form-item ">
 					<view class="login-form-item-label">
@@ -19,6 +20,7 @@
 						<input  class="put" name="username"  placeholder="请输入工号" />
 					</view>
 				</view>
+				
 				<!-- 密码 -->
 				<view class="login-form-item">
 					<view class="login-form-item-label">
@@ -27,18 +29,16 @@
 					<view class="login-form-item-label">
 						<input  name="password" class="put"  placeholder="请输入密码" password="true" />
 					</view>
-				  
 				</view>
 				<view class="login-form-item">
 				  <button form-type="submit">登录</button>
 				</view>
 			</form>
-			<view class="login-form-repwd"><text>忘记密码</text></view>
+			<view class="login-form-end">
+				<text class="login-form-end-forget">忘记密码</text>
+				<text class="login-form-end-newuser">注册密码</text>
+			</view>
 		</view>
-		
-		<view>快捷登录</view>
-		<view>注册密码</view>
-		
 	</view>
 	
 </template>
@@ -48,11 +48,12 @@
 	 export default {
 	        data() {
 	            return {
-					userName:"管理员"
+					userName:"管理员",
+					
+					//模拟对象
 	            }
 	        },
 	        methods: {
-				
 				// 表单提交
 	            formSubmit: function(e) {
 					// 获取表单信息
@@ -119,17 +120,21 @@
 </script>
 
 <style lang="scss">
-	page{
+	page{//整体页面配置
 		background-color: #FFFFFF;
 	}
+	
+	//登录页面样式
 	.login-page{
 		width: 510rpx;
 		margin: 0 auto;
+		//头信息样式
 		.login-header{
 			height: 190rpx;
 			padding: 18rpx 0rpx;
-			margin-bottom: 50rpx;
+			margin-bottom: 120rpx;
 			margin-top:38rpx;
+			//图标样式
 			.login-header-icon{
 				width:128rpx;
 				height:128rpx;
@@ -142,7 +147,9 @@
 				margin-bottom:38rpx;
 			}
 		}
+		//表单样式
 		.login-form{
+			//表单项样式
 			.login-form-item{
 				padding:10px 0px;
 				button{
@@ -161,9 +168,13 @@
 				}
 				
 			}
-			.login-form-repwd{
+			//底部样式
+			.login-form-end{
 				font-size: 28rpx;
+				display: flex;
+				justify-content: space-between;
 			}
+			
 		}
 		
 	}

@@ -28,9 +28,9 @@
 			<view class="record">
 				<view class="record-title">
 					<text>每日记录</text>
-					<text class="record-title-item" >(8月)</text>
+					<text class="record-title-item" >({{month}}月)</text>
 				</view>
-					<view>
+					<view  class="recor-calendar">
 					    <uni-calendar 
 					    :insert="true"
 					    :showMonth = "false"
@@ -155,7 +155,7 @@
 			}
 			.record{
 				margin: 38rpx auto;
-				height: 480rpx;
+				// height: 480rpx;
 				width:674rpx;
 				background-color: #FFFFFF;
 				border-radius: 25rpx;
@@ -168,6 +168,10 @@
 						font-size: 28rpx;
 						padding-left: 20px;
 					}
+				}
+				.recor-calendar
+				{
+					// padding: 10rpx;
 				}
 			}
 			
