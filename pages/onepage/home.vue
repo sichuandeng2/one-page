@@ -3,6 +3,7 @@
 		<view class="home-page-heder">
 		</view>
 		<view class="home-page-body">
+			
 			<!-- 打卡统计 -->
 			<view class="count">
 				<view class="count-title">
@@ -115,16 +116,12 @@
 
 <style lang="scss">
 	.page{
-		background-color: #F5F5F5;
-		height: 100%;
-		.home-page-heder{
-			
-		}
+	
 		.home-page-body{
 			.count{
 				margin: 38rpx auto;
 				height: 230rpx;
-				width:674rpx;
+				width:700rpx;
 				background-color: #FFFFFF;
 				border-radius: 25rpx;
 				.count-title{
@@ -156,7 +153,7 @@
 			.record{
 				margin: 38rpx auto;
 				// height: 480rpx;
-				width:674rpx;
+				width:700rpx;
 				background-color: #FFFFFF;
 				border-radius: 25rpx;
 				.record-title{
@@ -171,6 +168,7 @@
 				}
 				.recor-calendar
 				{
+					// width:674rpx ;
 					// padding: 10rpx;
 				}
 			}

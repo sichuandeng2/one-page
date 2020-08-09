@@ -4,10 +4,10 @@
 		<view class="page-info">
 			<view class="page-info-circle">
 				<!-- <image src="../../static/image/blackimage.gif"></image> -->
-				<view class="page-info-circle-text">{{name}}</view>
+				<view class="page-info-circle-text">{{user.name}}</view>
 			</view>
 			<view class="page-info-attence">
-				<view><text>{{name}}</text></view>
+				<view><text>{{user.name}}</text></view>
 				<view><text>考勤</text><uniIcons type="arrowright" size="15"></uniIcons></view>
 			</view>
 			<!-- <text class="page-info-circle-text">{{name}}</text> -->
@@ -17,11 +17,13 @@
 				<text>今日未排班</text>
 			</view>
 			<view>
-			<view class="page-clock-clock">
+				<!-- <navigator url="../clock/default" open-type="navigate"> -->
+			<view class="page-clock-clock" @click="clock">
 					<view class="page-clock-clock-title">打卡</view>
 					<view class="page-clock-clock-text">{{now}}</view>		
 			</view>
-			<view>地址：{{addres}}</view>
+			<!-- </navigator> -->
+			<view class="page-clock-adress">地址：{{addres.localAdress}}</view>
 			</view>
 		</view>
 	</view>
@@ -30,67 +32,87 @@
 <script>
 	//组件引用
 	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
+	var thatLocation=null;
+	var thatTimer=null;
+
 	export default {
-			components:{
-				uniIcons
-			},
-			data(){
-				return{
-					name:"test",
-					now:null,
-					addres:""
-					}
+		components:{
+			uniIcons
+		},
+		data(){
+			return{
 				
-			},
-			methods:{
-				
-			},
-			onShow() {
-				
-			},
-			//页面加载方法
-			onLoad() {
-				var interval = setInterval(() => {
-					var date = new Date();
-					var hour = date.getHours();
-					var minute = date.getMinutes();
-					var  second=date.getSeconds();
-					hour<=9?hour= "0"+hour:hour;
-					minute<=9?minute= "0"+minute:minute;
-					second<=9?second= "0"+second:second;
-					this.now=hour+":"+minute+":"+second;
-				}, 1000)
-				
-				setInterval(()=>{
-					uni.getLocation({
-					    type: 'gcj02',
-						geocode:true,
-					    success: function (res) {
-							uni.showModal({
-								// content:res
-								content:'longitude'+res.longitude+'latitude：'+res.altitude+ 'street:'+res.street+'poiName'+res.address.poiName
-								,showCancel: false
-							})
-							this.addres=res.address.poiName
-						
-					    },
-						fail:function (res){
-							uni.showModal({
-								content:'失败'
-								,showCancel: false
-							})
-						}
-					});
-				},10000)
-			
-				
-		
-			},
-			//挂载完
-			mounted() {
-				
+				user:{
+					name:""
+				}, //登录数据
+				now:null,	//当前时间
+				addres:{
+					latitude:"",	//纬度
+					longitude:"",	//经度
+					localAdress:""	//当地名称
+				},
 			}
+		},
+		methods:{
+			clock(){
+				uni.navigateTo({
+					url:'../clock/default'
+				})
+			}
+		},
+		onShow() {
+			console.log("计时开始");
+			
+			//定位更新
+			thatLocation=setInterval(()=>{
+				uni.getLocation({
+					type: 'gcj02',
+					geocode:true,
+					success: function (res) {
+						uni.showModal({
+							content:'longitude'+res.longitude+'latitude：'+res.altitude+ 'street:'+res.street+'poiName'+res.address.poiName
+							,showCancel: false
+						})
+						console.log(res.address.poiName);
+						this.addres=res.address.poiName;
+					},
+					fail:function (res){
+						uni.showModal({
+							content:'失败'
+							,showCancel: false
+						})
+					}
+				});
+			},5000)
+			
+			//时间更新
+			thatTimer = setInterval(() => {
+				var date = new Date();
+				var hour = date.getHours();
+				var minute = date.getMinutes();
+				var  second=date.getSeconds();
+				hour<=9?hour= "0"+hour:hour;
+				minute<=9?minute= "0"+minute:minute;
+				second<=9?second= "0"+second:second;
+				this.now=hour+":"+minute+":"+second;
+			}, 1000)
 		}
+		,onHide() {
+			//清除定时器
+			console.log("定时器清除");
+			clearInterval(thatLocation);
+			clearInterval(thatTimer);
+		}
+	
+		//页面加载方法
+		,onLoad() {
+			
+		},
+		//挂载完
+		mounted() {
+			
+		}
+	}
 </script>
 
 <style lang="scss">
@@ -151,6 +173,10 @@
 					font-size: 24rpx;
 					padding-top: 20rpx;
 				}
+			}
+			.page-clock-adress{
+				font-size: 28rpx;
+				margin-top: 30rpx;
 			}
 		}
 	}
