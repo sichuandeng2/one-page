@@ -43,8 +43,12 @@
 				
 			},
 			methods:{
-			
+				
 			},
+			onShow() {
+				
+			},
+			//页面加载方法
 			onLoad() {
 				var interval = setInterval(() => {
 					var date = new Date();
@@ -56,29 +60,36 @@
 					second<=9?second= "0"+second:second;
 					this.now=hour+":"+minute+":"+second;
 				}, 1000)
+				
+				setInterval(()=>{
+					uni.getLocation({
+					    type: 'gcj02',
+						geocode:true,
+					    success: function (res) {
+							uni.showModal({
+								// content:res
+								content:'longitude'+res.longitude+'latitude：'+res.altitude+ 'street:'+res.street+'poiName'+res.address.poiName
+								,showCancel: false
+							})
+							this.addres=res.address.poiName
+						
+					    },
+						fail:function (res){
+							uni.showModal({
+								content:'失败'
+								,showCancel: false
+							})
+						}
+					});
+				},10000)
+			
+				
+		
 			},
-	
+			//挂载完
 			mounted() {
-				uni.getLocation({
-				    type: 'wgs84',
-					geocode:true,
-				    success: function (res) {
-						console.log(address);
-						this.addres=address.street;
-				        // console.log('当前位置的经度：' + res.longitude);
-				        // console.log('当前位置的纬度：' + res.latitude);
-						uni.showModal({
-							content:res.longitude
-							,showCancel: false
-						})
-				    },
-					fail:function (res){
-						console.log("错误返回"+res);
-					}
-				});
 				
 			}
-		
 		}
 </script>
 

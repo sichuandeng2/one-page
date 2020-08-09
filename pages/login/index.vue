@@ -116,7 +116,13 @@
 	            }
 	        
 	        }
-	    }
+			,mounted() {
+				// uni.showModal({
+				// 	content:'先试试'
+				// 	,showCancel: false
+				// })
+			}
+		}
 </script>
 
 <style lang="scss">

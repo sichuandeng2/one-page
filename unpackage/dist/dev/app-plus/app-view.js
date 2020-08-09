@@ -337,14 +337,23 @@ var render = function() {
           _c(
             "v-uni-view",
             { staticClass: _vm._$g(18, "sc"), attrs: { _i: 18 } },
-            [_c("v-uni-text", { attrs: { _i: 19 } }, [_vm._v("忘记密码")])],
+            [
+              _c(
+                "v-uni-text",
+                { staticClass: _vm._$g(19, "sc"), attrs: { _i: 19 } },
+                [_vm._v("忘记密码")]
+              ),
+              _c(
+                "v-uni-text",
+                { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
+                [_vm._v("注册密码")]
+              )
+            ],
             1
           )
         ],
         1
-      ),
-      _c("v-uni-view", { attrs: { _i: 20 } }, [_vm._v("快捷登录")]),
-      _c("v-uni-view", { attrs: { _i: 21 } }, [_vm._v("注册密码")])
+      )
     ],
     1
   )
@@ -437,7 +446,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\nbody {\r\n  background-color: #FFFFFF;\n}\n.login-page {\r\n  width: 510rpx;\r\n  margin: 0 auto;\n}\n.login-page .login-header {\r\n  height: 190rpx;\r\n  padding: 18rpx 0rpx;\r\n  margin-bottom: 50rpx;\r\n  margin-top: 38rpx;\n}\n.login-page .login-header .login-header-icon {\r\n  width: 128rpx;\r\n  height: 128rpx;\r\n  border-radius: 50%;\r\n  background-color: #009dfe;\r\n  color: #FFFFFF;\r\n  font-size: 32rpx;\r\n  text-align: center;\r\n  line-height: 128rpx;\r\n  margin-bottom: 38rpx;\n}\n.login-page .login-form .login-form-item {\r\n  padding: 10px 0px;\n}\n.login-page .login-form .login-form-item uni-button {\r\n  background-color: #98d0ff;\r\n  border-radius: 25rpx;\r\n  font-size: 36rpx;\n}\n.login-page .login-form .login-form-item .login-form-item-label {\r\n  font-size: 28rpx;\n}\n.login-page .login-form .login-form-item .login-form-item-label .put {\r\n  background-color: white;\r\n  border-bottom: 1px solid #000000;\r\n  height: 35px;\r\n  font-size: 36rpx;\n}\n.login-page .login-form .login-form-repwd {\r\n  font-size: 28rpx;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\nbody {\r\n  background-color: #FFFFFF;\n}\n.login-page {\r\n  width: 510rpx;\r\n  margin: 0 auto;\n}\n.login-page .login-header {\r\n  height: 190rpx;\r\n  padding: 18rpx 0rpx;\r\n  margin-bottom: 120rpx;\r\n  margin-top: 38rpx;\n}\n.login-page .login-header .login-header-icon {\r\n  width: 128rpx;\r\n  height: 128rpx;\r\n  border-radius: 50%;\r\n  background-color: #009dfe;\r\n  color: #FFFFFF;\r\n  font-size: 32rpx;\r\n  text-align: center;\r\n  line-height: 128rpx;\r\n  margin-bottom: 38rpx;\n}\n.login-page .login-form .login-form-item {\r\n  padding: 10px 0px;\n}\n.login-page .login-form .login-form-item uni-button {\r\n  background-color: #98d0ff;\r\n  border-radius: 25rpx;\r\n  font-size: 36rpx;\n}\n.login-page .login-form .login-form-item .login-form-item-label {\r\n  font-size: 28rpx;\n}\n.login-page .login-form .login-form-item .login-form-item-label .put {\r\n  background-color: white;\r\n  border-bottom: 1px solid #000000;\r\n  height: 35px;\r\n  font-size: 36rpx;\n}\n.login-page .login-form .login-form-end {\r\n  font-size: 28rpx;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1970,14 +1979,14 @@ var render = function() {
                   _c(
                     "v-uni-text",
                     { staticClass: _vm._$g(20, "sc"), attrs: { _i: 20 } },
-                    [_vm._v("(8月)")]
+                    [_vm._v("(" + _vm._$g(20, "t0-0") + "月)")]
                   )
                 ],
                 1
               ),
               _c(
                 "v-uni-view",
-                { attrs: { _i: 21 } },
+                { staticClass: _vm._$g(21, "sc"), attrs: { _i: 21 } },
                 [
                   _c("uni-calendar", {
                     attrs: { _i: 22 },
@@ -2847,7 +2856,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.page {\r\n  background-color: #F5F5F5;\r\n  height: 100%;\n}\n.page .home-page-body .count {\r\n  margin: 38rpx auto;\r\n  height: 230rpx;\r\n  width: 674rpx;\r\n  background-color: #FFFFFF;\r\n  border-radius: 25rpx;\n}\n.page .home-page-body .count .count-title {\r\n  width: 580rpx;\r\n  display: -webkit-inline-box;\r\n  display: -webkit-inline-flex;\r\n  display: inline-flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  margin-left: 20rpx;\r\n  padding: 18rpx;\r\n  font-weight: bolder;\n}\n.page .home-page-body .count .count-holder {\r\n  width: 674rpx;\r\n  display: -webkit-inline-box;\r\n  display: -webkit-inline-flex;\r\n  display: inline-flex;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\n}\n.page .home-page-body .count .count-holder .count-holder-item {\r\n  width: 198rpx;\r\n  text-align: center;\n}\n.page .home-page-body .count .count-holder .count-holder-item .count-holder-item-text {\r\n  padding-top: 5rpx;\r\n  font-size: 26rpx;\n}\n.page .home-page-body .record {\r\n  margin: 38rpx auto;\r\n  height: 480rpx;\r\n  width: 674rpx;\r\n  background-color: #FFFFFF;\r\n  border-radius: 25rpx;\n}\n.page .home-page-body .record .record-title {\r\n  width: 674rpx;\r\n  margin-left: 20rpx;\r\n  padding: 18rpx;\r\n  font-weight: bolder;\n}\n.page .home-page-body .record .record-title .record-title-item {\r\n  font-size: 28rpx;\r\n  padding-left: 20px;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.page {\r\n  background-color: #F5F5F5;\r\n  height: 100%;\n}\n.page .home-page-body .count {\r\n  margin: 38rpx auto;\r\n  height: 230rpx;\r\n  width: 674rpx;\r\n  background-color: #FFFFFF;\r\n  border-radius: 25rpx;\n}\n.page .home-page-body .count .count-title {\r\n  width: 580rpx;\r\n  display: -webkit-inline-box;\r\n  display: -webkit-inline-flex;\r\n  display: inline-flex;\r\n  -webkit-box-pack: justify;\r\n  -webkit-justify-content: space-between;\r\n          justify-content: space-between;\r\n  margin-left: 20rpx;\r\n  padding: 18rpx;\r\n  font-weight: bolder;\n}\n.page .home-page-body .count .count-holder {\r\n  width: 674rpx;\r\n  display: -webkit-inline-box;\r\n  display: -webkit-inline-flex;\r\n  display: inline-flex;\r\n  -webkit-box-pack: center;\r\n  -webkit-justify-content: center;\r\n          justify-content: center;\n}\n.page .home-page-body .count .count-holder .count-holder-item {\r\n  width: 198rpx;\r\n  text-align: center;\n}\n.page .home-page-body .count .count-holder .count-holder-item .count-holder-item-text {\r\n  padding-top: 5rpx;\r\n  font-size: 26rpx;\n}\n.page .home-page-body .record {\r\n  margin: 38rpx auto;\r\n  width: 674rpx;\r\n  background-color: #FFFFFF;\r\n  border-radius: 25rpx;\n}\n.page .home-page-body .record .record-title {\r\n  width: 674rpx;\r\n  margin-left: 20rpx;\r\n  padding: 18rpx;\r\n  font-weight: bolder;\n}\n.page .home-page-body .record .record-title .record-title-item {\r\n  font-size: 28rpx;\r\n  padding-left: 20px;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3012,7 +3021,7 @@ var render = function() {
                 ],
                 1
               ),
-              _c("veiw", { attrs: { _i: 17 } }, [
+              _c("v-uni-view", { attrs: { _i: 17 } }, [
                 _vm._v("地址：" + _vm._$g(17, "t0-0"))
               ])
             ],
@@ -3114,7 +3123,7 @@ if(false) {}
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ./node_modules/css-loader/dist/runtime/api.js */ 10);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.clock-page .page-info {\r\n  margin: 38rpx auto;\r\n  height: 180rpx;\r\n  width: 674rpx;\r\n  border-radius: 25rpx;\r\n  background-color: #FFFFFF;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n  -webkit-flex-direction: row;\r\n          flex-direction: row;\r\n  -webkit-box-pack: start;\r\n  -webkit-justify-content: flex-start;\r\n          justify-content: flex-start;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  padding-left: 38rpx;\n}\n.clock-page .page-info .page-info-attence {\r\n  padding: 20rpx;\r\n  font-size: 28rpx;\n}\n.clock-page .page-info .page-info-circle {\r\n  width: 100rpx;\r\n  height: 100rpx;\r\n  border-radius: 50%;\r\n  background-color: #009dfe;\r\n  text-align: center;\r\n  line-height: 100rpx;\r\n  color: #FFFFFF;\r\n  font-size: 32rpx;\n}\n.clock-page .page-clock {\r\n  margin: 0 auto;\r\n  width: 674rpx;\r\n  height: 826rpx;\r\n  background-color: #FFFFFF;\r\n  border-radius: 25rpx;\r\n  text-align: center;\n}\n.clock-page .page-clock .page-clock-schedule {\r\n  height: 300rpx;\r\n  line-height: 300rpx;\r\n  margin: 0 auto;\n}\n.clock-page .page-clock .page-clock-clock {\r\n  width: 300rpx;\r\n  height: 300rpx;\r\n  background: #009dfe;\r\n  margin: 0 auto;\r\n  border-radius: 50%;\n}\n.clock-page .page-clock .page-clock-clock .page-clock-clock-title {\r\n  color: #fff;\r\n  padding-top: 100rpx;\n}\n.clock-page .page-clock .page-clock-clock .page-clock-clock-text {\r\n  color: #fff;\r\n  font-size: 28rpx;\r\n  padding-top: 20rpx;\n}\r\n", ""]);
+exports.push([module.i, "@charset \"UTF-8\";\r\n/**\r\n * 这里是uni-app内置的常用样式变量\r\n *\r\n * uni-app 官方扩展插件及插件市场（https://ext.dcloud.net.cn）上很多三方插件均使用了这些样式变量\r\n * 如果你是插件开发者，建议你使用scss预处理，并在插件代码中直接使用这些变量（无需 import 这个文件），方便用户通过搭积木的方式开发整体风格一致的App\r\n *\r\n */\r\n/**\r\n * 如果你是App开发者（插件使用者），你可以通过修改这些变量来定制自己的插件主题，实现自定义主题功能\r\n *\r\n * 如果你的项目同样使用了scss预处理，你也可以直接在你的 scss 代码中使用如下变量，同时无需 import 这个文件\r\n */\r\n/* 颜色变量 */\r\n/* 行为相关颜色 */\r\n/* 文字基本颜色 */\r\n/* 背景颜色 */\r\n/* 边框颜色 */\r\n/* 尺寸变量 */\r\n/* 文字尺寸 */\r\n/* 图片尺寸 */\r\n/* Border Radius */\r\n/* 水平间距 */\r\n/* 垂直间距 */\r\n/* 透明度 */\r\n/* 文章场景相关 */\n.clock-page .page-info {\r\n  margin: 38rpx auto;\r\n  height: 180rpx;\r\n  width: 674rpx;\r\n  border-radius: 25rpx;\r\n  background-color: #FFFFFF;\r\n  display: -webkit-box;\r\n  display: -webkit-flex;\r\n  display: flex;\r\n  -webkit-box-orient: horizontal;\r\n  -webkit-box-direction: normal;\r\n  -webkit-flex-direction: row;\r\n          flex-direction: row;\r\n  -webkit-box-pack: start;\r\n  -webkit-justify-content: flex-start;\r\n          justify-content: flex-start;\r\n  -webkit-box-align: center;\r\n  -webkit-align-items: center;\r\n          align-items: center;\r\n  padding-left: 38rpx;\n}\n.clock-page .page-info .page-info-attence {\r\n  padding: 20rpx;\r\n  font-size: 28rpx;\n}\n.clock-page .page-info .page-info-circle {\r\n  width: 100rpx;\r\n  height: 100rpx;\r\n  border-radius: 50%;\r\n  background-color: #009dfe;\r\n  text-align: center;\r\n  line-height: 100rpx;\r\n  color: #FFFFFF;\r\n  font-size: 32rpx;\n}\n.clock-page .page-clock {\r\n  margin: 0 auto;\r\n  width: 674rpx;\r\n  height: 826rpx;\r\n  background-color: #FFFFFF;\r\n  border-radius: 25rpx;\r\n  text-align: center;\n}\n.clock-page .page-clock .page-clock-schedule {\r\n  height: 300rpx;\r\n  line-height: 300rpx;\r\n  margin: 0 auto;\n}\n.clock-page .page-clock .page-clock-clock {\r\n  width: 300rpx;\r\n  height: 300rpx;\r\n  background: #009dfe;\r\n  margin: 0 auto;\r\n  border-radius: 50%;\n}\n.clock-page .page-clock .page-clock-clock .page-clock-clock-title {\r\n  color: #fff;\r\n  padding-top: 100rpx;\n}\n.clock-page .page-clock .page-clock-clock .page-clock-clock-text {\r\n  color: #fff;\r\n  font-size: 24rpx;\r\n  padding-top: 20rpx;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
