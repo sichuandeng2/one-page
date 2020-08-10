@@ -42,8 +42,9 @@
 
 	var thatLocation=null;
 	var thatTimer=null;
-	
+	import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; //字体图标挂载
 	export default {
+		components:{uniIcons},
 		data(){
 			return{
 				mark:"checkmarkempty",

@@ -50,7 +50,12 @@
 </template>
 
 <script>
+	import uniCalendar from "~@/../components/uni-calendar/uni-calendar.vue"; //日历挂载
+	import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; //字体图标挂载
 	export default {
+		
+		components:{uniCalendar,uniIcons}
+		,
 	   data() {
 		   return {
 			   // popicon:"arrowup",
