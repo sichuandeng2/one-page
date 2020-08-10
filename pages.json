@@ -16,11 +16,16 @@
 				"backgroundColor":" #F5F5F5"
 			}
 		},
-		
 		{
 			"path":"pages/onepage/set",
 			"style":{
 				"navigationBarTitleText":"设置"
+			}
+		},	
+		{
+			"path":"pages/clock/attendanceStandards",
+			"style":{
+				"navigationBarTitleText":"考勤规则"
 			}
 		},
 		{

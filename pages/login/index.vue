@@ -122,6 +122,10 @@
 				// 	,showCancel: false
 				// })
 			}
+			,onLoad() {
+				// console.log(this.$serter.websiteUrl)
+				// console.log(this.$serter.debug)
+			}
 		}
 </script>
 

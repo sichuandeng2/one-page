@@ -8,7 +8,7 @@
 			</view>
 			<view class="page-info-attence">
 				<view><text>{{user.name}}</text></view>
-				<view>
+				<view @click="gotoAttendance">
 					<text>考勤</text>
 					<uniIcons type="arrowright" size="15"></uniIcons>
 				</view>
@@ -19,35 +19,31 @@
 			<view class="page-clock-schedule">
 				<text>今日未排班</text>
 			</view>
-			<view>
-				<!-- <navigator url="../clock/default" open-type="navigate"> -->
+			
 			<view class="page-clock-clock" @click="clock">
 					<view class="page-clock-clock-title">打卡</view>
 					<view class="page-clock-clock-text">{{now}}</view>		
 			</view>
-			<!-- </navigator> -->
+			
 			<view class="page-clock-adress">
 				<view class="page-clock-adress-mark">
-					<uniIcons v-bind:type="mark" :style="mark=='checkmarkempty' ? 'color:rgb(255,255,255)': 'rgb(255,0,0)'"></uniIcons>
+					<uniIcons v-bind:type="mark" 
+					:style="mark=='checkmarkempty' ? 'color:rgb(255,255,255)': 'rgb(255,0,0)'">
+					</uniIcons>
 				</view>
-				{{addres.localAdress}}</view>
-		
+				{{addres.localAdress}}
 			</view>
+		
 		</view>
 	</view>
 </template>
 
 <script>
-	//组件引用
-	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
+
 	var thatLocation=null;
 	var thatTimer=null;
 	
-
 	export default {
-		components:{
-			uniIcons
-		},
 		data(){
 			return{
 				mark:"checkmarkempty",
@@ -63,12 +59,21 @@
 			}
 		},
 		methods:{
+			
 			clock(){
-				console.log("点击")
+				console.log("点击打卡");
+				
+				
 				uni.navigateTo({
 					url:'../clock/default?clocktiem='+this.now
 				})
+			},
+			gotoAttendance:function (){
+				uni.navigateTo({
+					url:"../clock/attendanceStandards"
+				})
 			}
+			
 		},
 		onShow() {
 			

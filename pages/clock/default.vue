@@ -30,7 +30,8 @@
 	export default{
 		data(){
 			return{
-				clocktime:null
+				clocktime:null,
+				
 			}
 		},
 		onLoad(option) {

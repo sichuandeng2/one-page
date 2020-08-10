@@ -9,7 +9,7 @@
 				<view class="count-title">
 					<text>{{month}}月汇总</text>
 					<uniIcons type="arrowright" size="25"></uniIcons>
-					</view>
+				</view>
 				<view class="count-holder">
 					<view class="count-holder-item">
 						<view>0</view>
@@ -31,55 +31,64 @@
 					<text>每日记录</text>
 					<text class="record-title-item" >({{month}}月)</text>
 				</view>
-					<view  class="recor-calendar">
-					    <uni-calendar 
-					    :insert="true"
-					    :showMonth = "false"
-					    :start-date=startdate
-					    :end-date=enddate
-					    @change="change"
-					     />
-					</view>
+				<view  class="recor-calendar" >
+					<uni-calendar 
+					:insert="true"
+					:showMonth = "false"
+					:start-date=startdate
+					:end-date=enddate
+					@change="change"
+					 />
 				</view>
+				
+				<!-- <button @click="open">打开弹窗</button>
+				<uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup> -->
 			</view>
+			<view v-text="message" style="font-size: 28rpx; padding: 10rpx; background-color:#FFFFFF;height:100rpx;width:700rpx;margin: 38rpx auto;border-radius: 25rpx;"></view>
 		</view>
 	</view>
 </template>
 
 <script>
-	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
-	import uniCalendar from "../../components/uni-calendar/uni-calendar.vue";
 	export default {
-			components:{
-				uniIcons,
-				uniCalendar,
+	   data() {
+		   return {
+			   // popicon:"arrowup",
+			   // x: 0,
+			   // y: 800,
+			   // old: {
+				  //  x: 0,
+				  //  y: 0
+			   // },
+				user:{},
+				startdate:null,
+				enddate:null,
+				month:null,
+				message:"规则：无排班"
+			}
+		},
+		methods:{
+			
+			open(){
+				this.$refs.popup.open()
+			}
+			,change(){
 				
-			},
-	       data() {
-	           return {
-					user:{},
-					startdate:null,
-					enddate:null,
-					month:null
-				}
-			},
-			methods:{
-				change(){
-					
-				}
-			},
-		   mounted() {
+			}
+		},
+	   mounted() {
 			   
 			   //获取月历的开始和结束日期
 			   var now = new Date();
 			   var year = now.getFullYear();
 			   var month = now.getMonth()+1;
 			   var day = now.getDate();
-			   var lmon = [1,3,5,7,8,10,12];
-			   var smon = [4,6,9,11];
-				var endday =28;
-				if(month==2)
+			   var lmon = [1,3,5,7,8,10,12]; //大月
+			   var smon = [4,6,9,11];		//小月
+				var endday =28;				//2月
+				if(month==2)//是否为2月
 				{
+					//四年一闰，百年不闰，四百年又闰
 					if(year%4===0&&year%100!==0||year%400===0)
 					endday=29;
 					else{
@@ -87,18 +96,19 @@
 					}
 				}
 				else{
+					//是否为大月
 					lmon.forEach((i)=>{
 							if(i===month) endday=31;
-						})
-						smon.forEach((i)=>{
-							if(i===month) endday=30;
-						})
+					})
+					//是否为小月
+					smon.forEach((i)=>{
+						if(i===month) endday=30;
+					})
 					
 				}
 				this.month=month;
 				this.startdate = year +'-' +month+'-' +"1";
 				this.enddate = year + '-'+month+'-'+endday;
-				
 			
 			   //加载登录数据
 			   uni.getStorage({
@@ -116,7 +126,7 @@
 
 <style lang="scss">
 	.page{
-	
+		;
 		.home-page-body{
 			.count{
 				margin: 38rpx auto;
@@ -151,6 +161,7 @@
 				
 			}
 			.record{
+				
 				margin: 38rpx auto;
 				// height: 480rpx;
 				width:700rpx;

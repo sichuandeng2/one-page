@@ -1,32 +1,53 @@
 <template>
-	<view class="page">index/test
-	<view >
-		当前时间：{{now}}
-	</view>
-
-	</view>
+    <view >
+        <view >
+            <view >
+                示例 1
+                <text>\nmovable-view 区域小于 movable-area</text>
+            </view>
+            <movable-area style="height: 500rpx; width:500rpx"> 
+                <movable-view :x="x" :y="y" direction="all" @change="onChange">text</movable-view>
+            </movable-area>
+            <view @tap="tap" >
+                点击这里移动至 (30px, 30px)
+            </view>
+            <view >
+                示例 2
+                <text>\nmovable-view区域大于movable-area</text>
+            </view>
+            <movable-area>
+                <movable-view  direction="all">text</movable-view>
+            </movable-area>
+        </view>
+    </view>
 </template>
 
 <script>
-	export default{
-		data(){
-			return{
-				now:""
-			}
-		}
-		,methods:{
-			
-		}
-		,mounted(){
-			var date = new Date(),
-			hour = date.getHours() < 10 ? "0" + date.getHours() : date.getHours(),
-			minute = date.getMinutes() < 10 ? "0" + date.getMinutes() : date.getMinutes(),
-			second = date.getSeconds() < 10 ? "0" + date.getSeconds() : date.getSeconds();
-			month >= 1 && month <= 9 ? (month = "0" + month) : "";
-			day >= 0 && day <= 9 ? (day = "0" + day) : "";
-			var timer = hour + ':' + minute + ':' + second;
-			this.now= timer;
-		}
+	export default {
+	    data() {
+	        return {
+	            x: 0,
+	            y: 0,
+	            old: {
+	                x: 0,
+	                y: 0
+	            }
+	        }
+	    },
+	    methods: {
+	        tap: function(e) {
+	            this.x = this.old.x
+	            this.y = this.old.y
+	            this.$nextTick(function() {
+	                this.x = 30
+	                this.y = 30
+	            })
+	        },
+	        onChange: function(e) {
+	            this.old.x = e.detail.x
+	            this.old.y = e.detail.y
+	        }
+	    }
 	}
 
 </script>
