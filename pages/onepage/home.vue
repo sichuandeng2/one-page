@@ -1,7 +1,5 @@
 <template>
 	<view class="page">
-		<view class="home-page-heder">
-		</view>
 		<view class="home-page-body">
 			
 			<!-- 打卡统计 -->
@@ -25,12 +23,15 @@
 					</view>
 				</view>
 			</view>
-			<!-- 打卡记录 -->
+			
+			<!-- 月历信息 -->
 			<view class="record">
+				<!-- 打卡记录 -->
 				<view class="record-title">
 					<text>每日记录</text>
 					<text class="record-title-item" >({{month}}月)</text>
 				</view>
+				<!-- 月历模块 -->
 				<view  class="recor-calendar" >
 					<uni-calendar 
 					:insert="true"
@@ -40,31 +41,59 @@
 					@change="change"
 					 />
 				</view>
-				
-				<!-- <button @click="open">打开弹窗</button>
-				<uni-popup ref="popup" type="bottom">底部弹出 Popup</uni-popup> -->
 			</view>
-			<view v-text="message" style="font-size: 28rpx; padding: 10rpx; background-color:#FFFFFF;height:100rpx;width:700rpx;margin: 38rpx auto;border-radius: 25rpx;"></view>
+			
+			<!-- 月历信息 -->
+			<view  class="record-info" style="">
+					<view v-text="message" class="message"></view>
+			</view>
 		</view>
 	</view>
 </template>
 
 <script>
+	// 获取日历日期范围
+	function getdate(that){
+		//获取月历的开始和结束日期
+		var now = new Date();
+		var year = now.getFullYear();
+		var month = now.getMonth()+1;
+		var day = now.getDate();
+		var lmon = [1,3,5,7,8,10,12]; //大月
+		var smon = [4,6,9,11];		//小月
+		var endday =28;				//2月
+		if(month==2)//是否为2月
+		{
+			//四年一闰，百年不闰，四百年又闰
+			if(year%4===0&&year%100!==0||year%400===0)
+			endday=29;
+			else{
+				endday=28;
+			}
+		}
+		else{
+			//是否为大月
+			lmon.forEach((i)=>{
+					if(i===month) endday=31;
+			})
+			//是否为小月
+			smon.forEach((i)=>{
+				if(i===month) endday=30;
+			})
+			
+		}
+		that.month=month;
+		that.startdate = year +'-' +month+'-' +"1";
+		that.enddate = year + '-'+month+'-'+endday;
+		
+	}
+	
 	import uniCalendar from "~@/../components/uni-calendar/uni-calendar.vue"; //日历挂载
 	import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; //字体图标挂载
 	export default {
-		
 		components:{uniCalendar,uniIcons}
-		,
-	   data() {
+	    ,data() {
 		   return {
-			   // popicon:"arrowup",
-			   // x: 0,
-			   // y: 800,
-			   // old: {
-				  //  x: 0,
-				  //  y: 0
-			   // },
 				user:{},
 				startdate:null,
 				enddate:null,
@@ -82,38 +111,8 @@
 			}
 		},
 	   mounted() {
-			   
-			   //获取月历的开始和结束日期
-			   var now = new Date();
-			   var year = now.getFullYear();
-			   var month = now.getMonth()+1;
-			   var day = now.getDate();
-			   var lmon = [1,3,5,7,8,10,12]; //大月
-			   var smon = [4,6,9,11];		//小月
-				var endday =28;				//2月
-				if(month==2)//是否为2月
-				{
-					//四年一闰，百年不闰，四百年又闰
-					if(year%4===0&&year%100!==0||year%400===0)
-					endday=29;
-					else{
-						endday=28;
-					}
-				}
-				else{
-					//是否为大月
-					lmon.forEach((i)=>{
-							if(i===month) endday=31;
-					})
-					//是否为小月
-					smon.forEach((i)=>{
-						if(i===month) endday=30;
-					})
-					
-				}
-				this.month=month;
-				this.startdate = year +'-' +month+'-' +"1";
-				this.enddate = year + '-'+month+'-'+endday;
+			   getdate(this);
+
 			
 			   //加载登录数据
 			   uni.getStorage({
@@ -131,7 +130,6 @@
 
 <style lang="scss">
 	.page{
-		;
 		.home-page-body{
 			.count{
 				margin: 38rpx auto;
@@ -140,35 +138,33 @@
 				background-color: #FFFFFF;
 				border-radius: 25rpx;
 				.count-title{
-					width: 580rpx;
-					display:inline-flex;
+					display:flex;
 					justify-content:space-between;
-					margin-left: 20rpx;
-					padding:18rpx;
 					font-weight: bolder;
+					padding:26rpx;
+					padding-bottom: 5rpx;
 				}
 				.count-holder{
-					width:674rpx ;
-					display:inline-flex;
-					justify-content:center;
+					// border:1rpx solid #DDDDDD;
+					display:flex;
+					justify-content:space-between;
+					font-size: 38rpx;
+					font-family:DFKai-SB;
+					padding:8rpx 26rpx;
 					.count-holder-item{
-						width: 198rpx;
+						// border:1rpx solid #00DDDD;
+						width:180rpx;
 						text-align: center;
 						.count-holder-item-text{
-							padding-top: 5rpx;
 							font-size: 26rpx;
+							font-family:"宋体";
+							padding-top: 8rpx;
 						}
-						
-						
-						// background-color: #DD524D;
 					}
 				}
-				
 			}
 			.record{
-				
 				margin: 38rpx auto;
-				// height: 480rpx;
 				width:700rpx;
 				background-color: #FFFFFF;
 				border-radius: 25rpx;
@@ -182,14 +178,18 @@
 						padding-left: 20px;
 					}
 				}
-				.recor-calendar
-				{
-					// width:674rpx ;
-					// padding: 10rpx;
-				}
 			}
-			
-			
+		}
+		.record-info{
+			font-size: 28rpx;
+			background-color:#FFFFFF;
+			height:100rpx;
+			width:700rpx;
+			margin: 38rpx auto;
+			border-radius: 25rpx;
+			.message{
+				padding: 18rpx;
+			}
 		}
 	}
 </style>

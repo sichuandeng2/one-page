@@ -11,6 +11,13 @@
 			}
 		},
 		{
+			"path":"pages/clock/details",
+			"style":{
+				"backgroundColor":" #FFFFFF",
+				"navigationBarTitleText":"统计"
+			}
+		},
+		{
 			"path":"pages/index/index",
 			"style":{
 				"backgroundColor":" #F5F5F5"

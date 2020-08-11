@@ -13,7 +13,7 @@
 			
 		</view>
 		<view class="clock-page-foot">
-			<view class="clock-page-foot-result">
+			<view class="clock-page-foot-result" @click="details">
 				打卡结果
 			</view>
 			<text class="clock-page-foot-holder">|</text>
@@ -32,6 +32,13 @@
 			return{
 				clocktime:null,
 				
+			}
+		},
+		methods:{
+			details(){
+				uni.navigateTo({
+				    url:"details"
+				});
 			}
 		},
 		onLoad(option) {

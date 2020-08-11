@@ -19,7 +19,6 @@
 							<view> 周一、二、三、四、五、六：09：00-18：00</view>
 							<view>周日 休息</view>
 						</view>
-			           
 			        </view>
 			    </uni-collapse-item>
 			    
@@ -53,6 +52,9 @@
 </script>
 
 <style lang="scss">
+	page{
+		background-color: #FFFFFF;
+	}
 	.attendance-page{
 		display: flex;
 		flex-direction: column;

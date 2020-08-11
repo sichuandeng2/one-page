@@ -1,9 +1,9 @@
 <template>
 	<view class="clock-page">
 		
+		<!-- 考勤 -->
 		<view class="page-info">
 			<view class="page-info-circle">
-				<!-- <image src="../../static/image/blackimage.gif"></image> -->
 				<view class="page-info-circle-text">{{user.name}}</view>
 			</view>
 			<view class="page-info-attence">
@@ -13,166 +13,159 @@
 					<uniIcons type="arrowright" size="15"></uniIcons>
 				</view>
 			</view>
-			<!-- <text class="page-info-circle-text">{{name}}</text> -->
 		</view>
+		
+		<!-- 打卡 -->
 		<view class="page-clock">
 			<view class="page-clock-schedule">
 				<text>今日未排班</text>
 			</view>
-			
-			<view class="page-clock-clock" @click="clock">
+			<view class="page-clock-clock" @click="clock" :style="!isclock ? 'background-color: #EEEEEE':'background-color: rgb(0,157,254)'">
 					<view class="page-clock-clock-title">打卡</view>
 					<view class="page-clock-clock-text">{{now}}</view>		
 			</view>
 			
 			<view class="page-clock-adress">
-				<view class="page-clock-adress-mark">
+				<view class="page-clock-adress-mark" :style="mark=='checkmarkempty' ? 'background-color: rgb(0,187,82)':'background-color: rgb(255,0,0)'">
 					<uniIcons v-bind:type="mark" 
-					:style="mark=='checkmarkempty' ? 'color:rgb(255,255,255)': 'rgb(255,0,0)'">
+					style="color:rgb(255,255,255)">
 					</uniIcons>
 				</view>
 				{{addres.localAdress}}
 			</view>
 		
 		</view>
-	</view>
+	<!-- 	 <map style="width: 100%; 
+		 height: 300px;" 
+		 :latitude="addres.latitude" 
+		 :longitude="addres.longitude" 
+		 :markers="covers" 
+		 :circles="circles"></map> -->
+</view>
 </template>
 
 <script>
 
-	var thatLocation=null;
-	var thatTimer=null;
+	var thatLocation=null;	//定位标识
+	var thatTimer=null;		//定时标识
+	//定时器
+	function timer(that){
+		
+		getTime(that);
+		getOnLoction(that);
+		thatTimer= setInterval(getTime,1000,that);
+		thatLocation =setInterval(getOnLoction,5000,that);
+		
+	}
+	//获取时间
+	function getTime(that){
+		var date = new Date();
+		var hour = date.getHours();
+		var minute = date.getMinutes();
+		var  second=date.getSeconds();
+		hour<=9?hour= "0"+hour:hour;
+		minute<=9?minute= "0"+minute:minute;
+		second<=9?second= "0"+second:second;
+		that.now=hour+":"+minute+":"+second;
+	}
+	//获取定位
+	function getOnLoction(that){
+		uni.getLocation({
+			type: 'gcj02',
+			horizontalAccuracy:1,
+			geocode:true,
+			success:  (res) =>{
+				accuracy:2;
+				console.log("地址为："+res.address.poiName);
+				that.addres.localAdress=res.address.poiName;
+				that.addres.longitude=res.longitude;
+				that.addres.latitude = res.latitude;
+				that.mark = "checkmarkempty";
+				that.covers[0].longitude=that.circles[0].longitude=res.longitude;
+				that.covers[0].latitude=that.circles[0].latitude=res.latitude;
+				console.log("经度：" +that.addres.longitude+"纬度："+that.addres.latitude)
+				// uni.showModal({
+				// 	content:"经度：" +that.addres.longitude+"纬度："+that.addres.latitude
+				// })
+			},
+			fail:function (res){
+				console.log("地址获取失败");
+				that.mark="closeempty";
+				that.addres.localAdress="地址获取失败"
+				uni.showModal({
+					content:'失败'
+					,showCancel: false
+				})
+			}
+		});
+	}
+	
 	import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; //字体图标挂载
 	export default {
 		components:{uniIcons},
 		data(){
 			return{
+				
+				isclock:true,
 				mark:"checkmarkempty",
+				//登录数据
 				user:{
 					name:"管理员"
-				}, //登录数据
-				now:"1111",	//当前时间
+				}, 
+				now:"",	//当前时间
 				addres:{
 					latitude:"",	//纬度
 					longitude:"",	//经度
 					localAdress:""	//当地名称
 				},
+				 covers: [{
+					latitude: 39.909,
+					longitude: 116.39742,
+					title:"当前位置",
+					iconPath: '/../../static/location.ico'
+				}],
+				circles:[
+					{
+						latitude: 39.909,
+						longitude: 116.39742,
+						color:"#999",
+						// radius:100,
+						strokeWidth:2
+					}
+				]
 			}
 		},
+		
 		methods:{
-			
+			// 打卡事件
 			clock(){
 				console.log("点击打卡");
-				
-				
 				uni.navigateTo({
 					url:'../clock/default?clocktiem='+this.now
 				})
 			},
+			// 考勤标准事件
 			gotoAttendance:function (){
 				uni.navigateTo({
 					url:"../clock/attendanceStandards"
 				})
 			}
-			
-		},
-		onShow() {
-			
-			var date = new Date();
-			var hour = date.getHours();
-			var minute = date.getMinutes();
-			var  second=date.getSeconds();
-			hour<=9?hour= "0"+hour:hour;
-			minute<=9?minute= "0"+minute:minute;
-			second<=9?second= "0"+second:second;
-			this.now=hour+":"+minute+":"+second;
-			
-			uni.getLocation({
-				type: 'gcj02',
-				geocode:true,
-				success:  (res) =>{
-					console.log("地址为："+res.address.poiName);
-					this.addres.localAdress=res.address.poiName;
-					this.addres.longitude=res.longitude;
-					this.addres.latitude = res.latitude;
-					this.mark = "checkmarkempty";
-				},
-				fail:function (res){
-					// uni.showModal({
-					// 	content:'失败'
-					// 	,showCancel: false
-					// })
-					console.log("地址获取失败");
-					this.mark="closeempty";
-					this.addres.localAdress="地址获取失败"
-				}
-			});
-			
-			console.log("计时开始");
-			
-			//定位更新
-			thatLocation=setInterval(()=>{
-				uni.getLocation({
-					type: 'gcj02',
-					geocode:true,
-					success:  (res) =>{
-						console.log("地址为："+res.address.poiName);
-						this.addres.localAdress=res.address.poiName;
-						this.addres.longitude=res.longitude;
-						this.addres.latitude = res.latitude;
-						this.mark = "checkmarkempty";
-					},
-					fail:function (res){
-						// uni.showModal({
-						// 	content:'失败'
-						// 	,showCancel: false
-						// })
-						console.log("地址获取失败");
-						this.mark="closeempty";
-						this.addres.localAdress="地址获取失败"
-					}
-				});
-			},5000)
-			
-			//时间更新
-			thatTimer = setInterval(() => {
-				var date = new Date();
-				var hour = date.getHours();
-				var minute = date.getMinutes();
-				var  second=date.getSeconds();
-				hour<=9?hour= "0"+hour:hour;
-				minute<=9?minute= "0"+minute:minute;
-				second<=9?second= "0"+second:second;
-				this.now=hour+":"+minute+":"+second;
-			}, 1000)
-			
-			
-			
-			
-			
 		}
-		
-		
+		,onShow() {
+			//计时器
+			console.log("定时器启动");
+			timer(this);
+		}
 		,onHide() {
 			//清除定时器
-			console.log("定时器清除");
+			console.log("定时器结束");
 			clearInterval(thatLocation);
 			clearInterval(thatTimer);
-		}
-	
-		//页面加载方法
-		,onLoad() {
-			
-		},
-		//挂载完
-		mounted() {
-			
 		}
 	}
 </script>
 
 <style lang="scss">
-	
 	.clock-page{
 		display: flex;
 		flex-direction: column;
@@ -180,7 +173,6 @@
 		align-items: center;
 		text-align: center;
 		.page-info{
-				// margin: 38rpx auto;
 			height: 180rpx;
 			width:674rpx;
 			border-radius: 25rpx;
@@ -210,13 +202,11 @@
 			}
 		}
 		.page-clock{
-			// margin: 0 auto;
 			width:674rpx;
 			height: 926rpx;
 			background-color: #FFFFFF;
 			border-radius: 25rpx;
 			text-align:center;
-				// padding-left: 38rpx;
 			.page-clock-schedule{
 				height: 300rpx;
 				line-height: 300rpx;
@@ -243,13 +233,11 @@
 				margin-top: 30rpx;
 				display:flex;
 				justify-content: center;
-				// background-color: #6E6E6E;
 				.page-clock-adress-mark{
 					margin-top: 8rpx;
 					height: 28rpx;
 					width: 28rpx;
 					border-radius: 50%;
-					background-color: rgb(0,187,82);
 					color: #FFFFFF;
 					line-height: 28rpx ;
 					font-size: 8rpx;
