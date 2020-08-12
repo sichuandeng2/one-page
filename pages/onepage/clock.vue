@@ -46,66 +46,10 @@
 
 <script>
 
-	var thatLocation=null;	//定位标识
-	var thatTimer=null;		//定时标识
-	//定时器
-	function timer(that){
-		
-		getTime(that);
-		getOnLoction(that);
-		thatTimer= setInterval(getTime,1000,that);
-		thatLocation =setInterval(getOnLoction,5000,that);
-		
-	}
-	//获取时间
-	function getTime(that){
-		var date = new Date();
-		var hour = date.getHours();
-		var minute = date.getMinutes();
-		var  second=date.getSeconds();
-		hour<=9?hour= "0"+hour:hour;
-		minute<=9?minute= "0"+minute:minute;
-		second<=9?second= "0"+second:second;
-		that.now=hour+":"+minute+":"+second;
-	}
-	//获取定位
-	function getOnLoction(that){
-		uni.getLocation({
-			type: 'gcj02',
-			horizontalAccuracy:1,
-			geocode:true,
-			success:  (res) =>{
-				accuracy:2;
-				console.log("地址为："+res.address.poiName);
-				that.addres.localAdress=res.address.poiName;
-				that.addres.longitude=res.longitude;
-				that.addres.latitude = res.latitude;
-				that.mark = "checkmarkempty";
-				that.covers[0].longitude=that.circles[0].longitude=res.longitude;
-				that.covers[0].latitude=that.circles[0].latitude=res.latitude;
-				console.log("经度：" +that.addres.longitude+"纬度："+that.addres.latitude)
-				// uni.showModal({
-				// 	content:"经度：" +that.addres.longitude+"纬度："+that.addres.latitude
-				// })
-			},
-			fail:function (res){
-				console.log("地址获取失败");
-				that.mark="closeempty";
-				that.addres.localAdress="地址获取失败"
-				uni.showModal({
-					content:'失败'
-					,showCancel: false
-				})
-			}
-		});
-	}
-	
-	import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; //字体图标挂载
+	var	Interval={};
 	export default {
-		components:{uniIcons},
 		data(){
 			return{
-				
 				isclock:true,
 				mark:"checkmarkempty",
 				//登录数据
@@ -135,7 +79,6 @@
 				]
 			}
 		},
-		
 		methods:{
 			// 打卡事件
 			clock(){
@@ -154,17 +97,17 @@
 		,onShow() {
 			//计时器
 			console.log("定时器启动");
-			timer(this);
+			Interval=this.$setter.timer(this);
 		}
 		,onHide() {
 			//清除定时器
+			clearInterval(Interval.getTime);
+			clearInterval(Interval.getOnLoction);
 			console.log("定时器结束");
-			clearInterval(thatLocation);
-			clearInterval(thatTimer);
 		}
 	}
 </script>
-
+	
 <style lang="scss">
 	.clock-page{
 		display: flex;

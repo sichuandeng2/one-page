@@ -21,11 +21,9 @@
 
 <script>
 	import setitem from "../components/setItem.vue";
-	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
 	export default {
 			components:{
-				setitem,
-				uniIcons
+				setitem
 			},
 		}
 	

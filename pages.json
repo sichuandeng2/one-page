@@ -1,13 +1,10 @@
 {
-	"pages": [
-		// {
-		// 	"path": "pages/index/test"
-		// },
+		"pages": [
 		{
-			"path": "pages/login/index",
+			"path":"pages/index/index",
 			"style":{
-				"navigationBarTitleText":"",
-				"backgroundColor":"#FFFFFF"
+				"backgroundColor":" #FFFFFF",
+				"navigationBarTitleText":"统计"
 			}
 		},
 		{
@@ -15,12 +12,6 @@
 			"style":{
 				"backgroundColor":" #FFFFFF",
 				"navigationBarTitleText":"统计"
-			}
-		},
-		{
-			"path":"pages/index/index",
-			"style":{
-				"backgroundColor":" #F5F5F5"
 			}
 		},
 		{

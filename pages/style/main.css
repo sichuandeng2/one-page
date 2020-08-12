@@ -1,21 +1,8 @@
-
-.test{
-	background-color: #007A00;
-	color: #FFff00;
-	border: 2px groove #000000 ;
-}
-
-
-
-
-
-
 /* //全局css样式配置 */
-/* view,text,h1,h2,div,body{ */
-/* 	margin: 0px;
+view,text,h1,h2,div,body{
+	margin: 0px;
 	padding: 0px;
 	box-sizing: content-box;
 	border: 2rpx groove #007AFF;
-	
  }
- */
+

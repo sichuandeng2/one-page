@@ -52,46 +52,9 @@
 </template>
 
 <script>
-	// 获取日历日期范围
-	function getdate(that){
-		//获取月历的开始和结束日期
-		var now = new Date();
-		var year = now.getFullYear();
-		var month = now.getMonth()+1;
-		var day = now.getDate();
-		var lmon = [1,3,5,7,8,10,12]; //大月
-		var smon = [4,6,9,11];		//小月
-		var endday =28;				//2月
-		if(month==2)//是否为2月
-		{
-			//四年一闰，百年不闰，四百年又闰
-			if(year%4===0&&year%100!==0||year%400===0)
-			endday=29;
-			else{
-				endday=28;
-			}
-		}
-		else{
-			//是否为大月
-			lmon.forEach((i)=>{
-					if(i===month) endday=31;
-			})
-			//是否为小月
-			smon.forEach((i)=>{
-				if(i===month) endday=30;
-			})
-			
-		}
-		that.month=month;
-		that.startdate = year +'-' +month+'-' +"1";
-		that.enddate = year + '-'+month+'-'+endday;
-		
-	}
-	
 	import uniCalendar from "~@/../components/uni-calendar/uni-calendar.vue"; //日历挂载
-	import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; //字体图标挂载
 	export default {
-		components:{uniCalendar,uniIcons}
+		components:{uniCalendar}
 	    ,data() {
 		   return {
 				user:{},
@@ -100,30 +63,62 @@
 				month:null,
 				message:"规则：无排班"
 			}
-		},
-		methods:{
-			
+		}
+		,methods:{
 			open(){
 				this.$refs.popup.open()
 			}
 			,change(){
 				
 			}
-		},
-	   mounted() {
-			   getdate(this);
-
+			// 设置日历日期
+			,getdate(){
+				//获取月历的开始和结束日期
+				var now = new Date();
+				var year = now.getFullYear();
+				var month = now.getMonth()+1;
+				var day = now.getDate();
+				var lmon = [1,3,5,7,8,10,12]; //大月
+				var smon = [4,6,9,11];		//小月
+				var endday =28;				//2月
+				if(month==2)//是否为2月
+				{
+					//四年一闰，百年不闰，四百年又闰
+					if(year%4===0&&year%100!==0||year%400===0)
+					endday=29;
+					else{
+						endday=28;
+					}
+				}
+				else{
+					//是否为大月
+					lmon.forEach((i)=>{
+							if(i===month) endday=31;
+					})
+					//是否为小月
+					smon.forEach((i)=>{
+						if(i===month) endday=30;
+					})
+				}
+				this.month=month;
+				this.startdate = year +'-' +month+'-' +"1";
+				this.enddate = year + '-'+month+'-'+endday;
+			}
+		}
+	    ,mounted() {
+			// 设置日历日期
+			this.getdate();
 			
-			   //加载登录数据
-			   uni.getStorage({
+			//加载登录数据
+		    uni.getStorage({
 				key: 'userinfo',
 				success: (res) =>{
 					this.user=res.data.username;
 					console.log(res.data.username);
 					console.log(this);
 				}
-			   });
-		   },
+			});
+		},
 		 
 	}
 </script>
