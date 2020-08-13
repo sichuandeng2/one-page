@@ -3,13 +3,13 @@
 
 		<!-- 头信息 -->
 		<view class="login-header">
-			<view class="login-header-icon">{{userName}} </view>
+			<!-- <view class="login-header-icon">{{userName}} </view> -->
 			<view class="welcome">欢迎使用uni-app</view>
 		</view>
 
 		<!-- 表单 -->
 		<view class="login-form">
-			<form @submit="formSubmit" @reset="formReset">
+			<form @submit="formSubmit">
 
 				<!-- 工号 -->
 				<view class="login-form-item ">
@@ -17,7 +17,7 @@
 						<text>工号</text>
 					</view>
 					<view class="login-form-item-label">
-						<input class="put" name="username" placeholder="请输入工号" />
+						<input class="put" v-model="username" placeholder="请输入工号" />
 					</view>
 				</view>
 
@@ -27,11 +27,11 @@
 						<text>密码</text>
 					</view>
 					<view class="login-form-item-label">
-						<input name="password" class="put" placeholder="请输入密码" password="true" />
+						<input v-model="password" class="put" placeholder="请输入密码" password="true" />
 					</view>
 				</view>
 				<view class="login-form-item">
-					<button form-type="submit">登录</button>
+					<button @click="login()">登录</button>
 				</view>
 			</form>
 			<view class="login-form-end">
@@ -44,89 +44,63 @@
 </template>
 
 <script>
-	import res from "../json/login.js";
+	import request from '@/utils/request.js'
 	export default {
 		data() {
 			return {
-				userName: "管理员",
+				// userName: "管理员",
+				username: '',
+				password: ''
+			}
+		},
+		onLoad() {
+			let token = uni.getStorageSync('token');
+			if (token) {
+				uni.reLaunch({
+					url: '../onepage/clock'
+				})
 			}
 		},
 		methods: {
-			// 表单提交
-			formSubmit: function(e) {
-				// 获取表单信息
-				var formdata = e.detail.value;
-				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value));
-
-				//测试判断
-				if (this.$setter.debug) {
-					console.log(res.data)
-					try {
-						uni.setStorageSync('userinfo', res.data);
-					} catch (e) {
-						uni.showModal({
-							content: '连接失败',
-							showCancel: false
-						});
-					}
-					uni.switchTab({
-						url: '/pages/onepage/home'
-					});
-				} else {
-					// 发起请求
-					uni.request({
-						// url: this.$setter.websiteUrl+'/api/v1/login/login',
-						url: "pages/JSON/login"
-							// 请求数据集
-							,
-						data: {
-							username: formdata.username,
-							password: formdata.password
-						},
-						method: 'GET'
-							// 请求头信息
-							,
-						header: {
-							'content-Type': 'application/x-www-form-urlencoded', //请求头信息
-						},
-						success: (res) => {
-							//遍历数据集
-							console.log(res);
-							//登录正常
-							if (res.code === 0) {
-								console.log(登录正常);
-								// 保存数据
-								try {
-									uni.setStorageSync('userinfo', res.data);
-								} catch (e) {
-									uni.showModal({
-										content: '连接失败',
-										showCancel: false
-									});
-								}
-								//页面跳转
-								uni.switchTab({
-									url: '/pages/onepage/home'
-								});
-							}
-							//用户信息错误
-							else if (res.code === 1001) {
-								uni.showModal({
-									content: "登录状态失效" + res.msg,
-									showCancel: false
-								});
-							}
-						}
-					});
+			login() {
+				if (this.username == '') {
+					uni.showToast({
+						title: '请输入工号',
+						icon: 'none'
+					})
+					return;
 				}
+				if (this.password == '') {
+					uni.showToast({
+						title: '请输入密码',
+						icon: 'none'
+					})
+					return;
+				}
+				var params = {
+					username: this.username,
+					password: this.password
+				}
+				//发送登录请求
+				request.post('/api/v1/login/login', params).then(res => {
+					console.log(res)
+					if (res.code == 0) {
+						// 本地存储token信息
+						uni.setStorageSync('token', res.data.token);
+						// 本地存储user信息
+						uni.setStorageSync('user', res.data.user);
+						// 跳转至app首页
+						uni.reLaunch({
+							url: '../onepage/clock'
+						})
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: 'none'
+						})
+					}
+				})
 			}
-		},
-		mounted() {
-			console.log(this.$setter.debug);
-			console.log(this.$setter.websiteUrl);
-		},
-		onLoad() {
-
 		}
 	}
 </script>

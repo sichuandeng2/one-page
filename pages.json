@@ -1,80 +1,83 @@
 {
-		"pages": [
-		{
-			"path":"pages/index/index",
-			"style":{
-				"backgroundColor":" #FFFFFF",
-				"navigationBarTitleText":"统计"
+	"pages": [{
+			"path": "pages/login/login",
+			"style": {
+				"navigationStyle": "custom"  // 去掉原生导航栏
+			}
+		}, {
+			"path": "pages/index/index",
+			"style": {
+				"backgroundColor": " #FFFFFF",
+				"navigationBarTitleText": "统计"
 			}
 		},
 		{
-			"path":"pages/clock/details",
-			"style":{
-				"backgroundColor":" #FFFFFF",
-				"navigationBarTitleText":"统计"
+			"path": "pages/clock/details",
+			"style": {
+				"backgroundColor": " #FFFFFF",
+				"navigationBarTitleText": "统计"
 			}
 		},
 		{
-			"path":"pages/onepage/set",
-			"style":{
-				"navigationBarTitleText":"设置"
-			}
-		},	
-		{
-			"path":"pages/clock/attendanceStandards",
-			"style":{
-				"navigationBarTitleText":"考勤规则"
+			"path": "pages/onepage/set",
+			"style": {
+				"navigationBarTitleText": "设置"
 			}
 		},
 		{
-			"path":"pages/onepage/home",
-			"style":{
-				"navigationBarTitleText":"统计"
+			"path": "pages/clock/attendanceStandards",
+			"style": {
+				"navigationBarTitleText": "考勤规则"
 			}
 		},
 		{
-			"path":"pages/onepage/clock",
-			"style":{
-				"navigationBarTitleText":"打卡"
+			"path": "pages/onepage/home",
+			"style": {
+				"navigationBarTitleText": "统计"
 			}
 		},
 		{
-			"path":"pages/clock/default",
-			"style":{
-				"navigationBarTitleText":"打卡"
+			"path": "pages/onepage/clock",
+			"style": {
+				"navigationBarTitleText": "打卡"
+			}
+		},
+		{
+			"path": "pages/clock/default",
+			"style": {
+				"navigationBarTitleText": "打卡"
 			}
 		}
-	
 	],
 	"globalStyle": {
-		"navigationStyle":"default",
-		"navigationBarTitleText":"uni-app",
-		"navigationBarBackgroundColor":"#FFFFFF",
-		"navigationBarTextStyle":"black"
+		"navigationStyle": "default",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"navigationBarTextStyle": "black"
 	},
 	"tabBar": {
-	    "color": "#7A7E83",
-	    "selectedColor": "rgb(50,178,218)",
-	    "borderStyle": "black",
-	    "backgroundColor": "#FFFFFF",
-	    "list": [{
-	       "pagePath": "pages/onepage/clock",
-	       "text": "打卡",
-		   "iconPath":"static/icon/myicon1.ico",
-		   "selectedIconPath":"static/icon/myicon4.ico"
-	    }, 
-		{
-			"pagePath": "pages/onepage/home",
-			"text": "统计",
-			"iconPath":"static/icon/myicon2.ico",
-			"selectedIconPath":"static/icon/myicon5.ico"
-	    },
-		{
-			"pagePath": "pages/onepage/set",
-			"text": "设置",
-			"iconPath":"static/icon/myicon3.ico",
-			"selectedIconPath":"static/icon/myicon6.ico"
-		}
+		"color": "#7A7E83",
+		"selectedColor": "rgb(50,178,218)",
+		"borderStyle": "black",
+		"backgroundColor": "#FFFFFF",
+		"list": [{
+				"pagePath": "pages/onepage/clock",
+				"text": "打卡",
+				"iconPath": "static/icon/myicon1.ico",
+				"selectedIconPath": "static/icon/myicon4.ico"
+			},
+			{
+				"pagePath": "pages/onepage/home",
+				"text": "统计",
+				"iconPath": "static/icon/myicon2.ico",
+				"selectedIconPath": "static/icon/myicon5.ico"
+			},
+			{
+				"pagePath": "pages/onepage/set",
+				"text": "设置",
+				"iconPath": "static/icon/myicon3.ico",
+				"selectedIconPath": "static/icon/myicon6.ico"
+			}
 		]
 	}
 }
