@@ -31,7 +31,6 @@
 		data(){
 			return{
 				clocktime:null,
-				
 			}
 		},
 		methods:{

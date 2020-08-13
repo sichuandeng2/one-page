@@ -4,21 +4,21 @@
 			
 			<!-- 打卡统计 -->
 			<view class="count">
-				<view class="count-title">
+				<view class="count-title" @click="details">
 					<text>{{month}}月汇总</text>
-					<uniIcons type="arrowright" size="25"></uniIcons>
+					<uniIcons  type="arrowright" size="25"></uniIcons>
 				</view>
 				<view class="count-holder">
 					<view class="count-holder-item">
-						<view>0</view>
+						<view>{{login.AverageManHour}}</view>
 						<view class="count-holder-item-text">平均工时(小时)</view>
 					</view>
 					<view class="count-holder-item">
-						<view>0</view>
+						<view>{{login.beLate}}</view>
 						<view class="count-holder-item-text">迟到(次)</view>
 					</view>
 					<view class="count-holder-item">
-						<view>0</view>
+						<view>{{login.leaveEarly}}</view>
 						<view class="count-holder-item-text">早退(次)</view>
 					</view>
 				</view>
@@ -38,6 +38,7 @@
 					:showMonth = "false"
 					:start-date=startdate
 					:end-date=enddate
+					:selected=login.selected
 					@change="change"
 					 />
 				</view>
@@ -57,19 +58,48 @@
 		components:{uniCalendar}
 	    ,data() {
 		   return {
-				user:{},
-				startdate:null,
-				enddate:null,
-				month:null,
-				message:"规则：无排班"
+				login:{}, //获取登录信息
+				startdate:null,	//月历开始日期
+				enddate:null,//月历结束日期
+				month:null,//当前月份
+				message:"无打卡记录"//日期排班信息
 			}
 		}
 		,methods:{
+			
 			open(){
 				this.$refs.popup.open()
 			}
-			,change(){
+			,change(e){
+				console.log("点击日期");
 				
+				var dates = this.login.selected;
+				
+				console.log(dates);
+				
+				
+				for( var i in dates)
+				{
+					console.log(dates[i].date);
+					console.log("数据为："+dates[i].date +"点击获取为："+e.fulldate);
+					if(e.fulldate==dates[i].date)
+					{
+						console.log(this.message);
+						this.message = dates[i].data.name;
+						console.log(this.message)
+						// console.log(dates[i].data.custom)
+						 
+						break;
+					}
+					else{
+						this.message="无打卡记录";
+					}
+				}
+			}
+			,details(){
+				uni.navigateTo({
+				    url:"../clock/details"
+				});
 			}
 			// 设置日历日期
 			,getdate(){
@@ -113,9 +143,9 @@
 		    uni.getStorage({
 				key: 'userinfo',
 				success: (res) =>{
-					this.user=res.data.username;
-					console.log(res.data.username);
-					console.log(this);
+					this.login=res.data.data;
+					console.log(JSON.stringify(res.data.data));
+					
 				}
 			});
 		},

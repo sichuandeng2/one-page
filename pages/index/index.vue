@@ -44,6 +44,7 @@
 </template>
 
 <script>
+import res from "../json/login.js";
 	 export default {
 		data() {
 			return {
@@ -55,55 +56,75 @@
 			formSubmit: function(e) {
 				// 获取表单信息
 				var formdata = e.detail.value;
-				console.log('form发生了submit事件，携带数据为：' + formdata);
-				uni.switchTab({
-					url: '/pages/onepage/home'
-				});
-				// 发起请求
-				uni.request({
-					url: this.$setter.websiteUrl+'/api/v1/login/login'
-					// 请求数据集
-					,data: {
-							username:formdata.username,
-							password:formdata.password
-					},
-					method:'POST',
-					// 请求头信息
-					header: {
-						'content-Type': 'application/x-www-form-urlencoded',//请求头信息
-					},
-					success: (res) => {
-						//遍历数据集
-						for (var i in res){
-							console.log(res.i);
+				console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value) );
+				
+				
+				//测试判断
+				if(this.$setter.debug)
+				{
+					console.log(res.data)
+					try {
+						uni.setStorageSync('userinfo', res.data);
+					} catch (e) {
+						uni.showModal({
+							content: '连接失败',
+							showCancel: false
+						});
+					}
+					uni.switchTab({
+						url: '/pages/onepage/home'
+					});
+				}
+				else{
+					
+					// 发起请求
+					uni.request({
+						// url: this.$setter.websiteUrl+'/api/v1/login/login',
+						url:"pages/JSON/login"
+						// 请求数据集
+						,data: {
+								username:formdata.username,
+								password:formdata.password
 						}
-						//登录正常
-						if(res.code===0)
-						{
-							console.log(登录正常);
-							// 保存数据
-							try {
-								uni.setStorageSync('userinfo', res.data);
-							} catch (e) {
+						,method:'GET'
+						// 请求头信息
+						,header: {
+							'content-Type': 'application/x-www-form-urlencoded',//请求头信息
+						}
+						,success: (res) => {
+							//遍历数据集
+							console.log(res);
+							//登录正常
+							if(res.code===0)
+							{
+								console.log(登录正常);
+								// 保存数据
+								try {
+									uni.setStorageSync('userinfo', res.data);
+								} catch (e) {
+									uni.showModal({
+										content: '连接失败',
+										showCancel: false
+									});
+								}
+								//页面跳转
+								uni.switchTab({
+									url: '/pages/onepage/home'
+								});
+							}
+							//用户信息错误
+							else if(res.code===1001){
 								uni.showModal({
-									content: '连接失败',
+									content: "登录状态失效"+ res.msg,
 									showCancel: false
 								});
 							}
-							// 页面跳转
-							uni.switchTab({
-								url: '/pages/onepage/home'
-							});
 						}
-						//用户信息错误
-						else if(res.code===1){
-							uni.showModal({
-								content: res.msg,
-								showCancel: false
-							});
-						}
-					}
-				});
+					});
+					
+				}
+				
+				
 			}
 		}
 		,mounted() {

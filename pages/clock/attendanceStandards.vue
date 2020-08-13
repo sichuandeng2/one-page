@@ -1,9 +1,9 @@
 <template>
 	<view class="attendance-page">
 		<view class="attendance-page-head">
-			<view class="attendance-page-head-circle">test</view>
+			<view class="attendance-page-head-circle">{{login.userName}}</view>
 			<view class="attendance-page-head-text">
-				<view class="attendance-page-head-text-username">test</view>
+				<view class="attendance-page-head-text-username">{{login.userName}}</view>
 				<view>
 					     
 				</view>
@@ -48,7 +48,25 @@
 </template>
 
 <script>
-	
+export default{
+	data(){
+		return{
+			login:{}
+		}
+	}
+	,mounted() {
+		//加载登录数据
+		uni.getStorage({
+			key: 'userinfo',
+			success: (res) =>{
+				this.login=res.data.data;
+				console.log(JSON.stringify(res.data.data));
+				
+			}
+		});
+	},
+
+}
 </script>
 
 <style lang="scss">

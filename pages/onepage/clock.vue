@@ -4,10 +4,10 @@
 		<!-- 考勤 -->
 		<view class="page-info">
 			<view class="page-info-circle">
-				<view class="page-info-circle-text">{{user.name}}</view>
+				<view class="page-info-circle-text">{{login.userName}}</view>
 			</view>
 			<view class="page-info-attence">
-				<view><text>{{user.name}}</text></view>
+				<view><text>{{login.userName}}</text></view>
 				<view @click="gotoAttendance">
 					<text>考勤</text>
 					<uniIcons type="arrowright" size="15"></uniIcons>
@@ -50,25 +50,26 @@
 	export default {
 		data(){
 			return{
-				isclock:true,
-				mark:"checkmarkempty",
+				login:{}
+				,isclock:true
+				,mark:"checkmarkempty"
 				//登录数据
-				user:{
+				,user:{
 					name:"管理员"
-				}, 
-				now:"",	//当前时间
-				addres:{
+				} 
+				,now:""	//当前时间
+				,addres:{
 					latitude:"",	//纬度
 					longitude:"",	//经度
 					localAdress:""	//当地名称
-				},
-				 covers: [{
+				}
+				 ,covers: [{
 					latitude: 39.909,
 					longitude: 116.39742,
 					title:"当前位置",
 					iconPath: '/../../static/location.ico'
-				}],
-				circles:[
+				}]
+				,circles:[
 					{
 						latitude: 39.909,
 						longitude: 116.39742,
@@ -94,6 +95,18 @@
 				})
 			}
 		}
+		,mounted(){
+			//加载登录数据
+			uni.getStorage({
+				key: 'userinfo',
+				success: (res) =>{
+					this.login=res.data.data;
+					// console.log(JSON.stringify(res.data.data));
+					
+				}
+			});
+			
+		}
 		,onShow() {
 			//计时器
 			console.log("定时器启动");
@@ -103,7 +116,7 @@
 			//清除定时器
 			clearInterval(Interval.getTime);
 			clearInterval(Interval.getOnLoction);
-			console.log("定时器结束");
+			
 		}
 	}
 </script>
@@ -127,6 +140,7 @@
 			margin-bottom: 58rpx;
 			margin-top: 30rpx;
 			.page-info-attence{
+				text-align: left;
 				padding: 20rpx;
 				font-size: 28rpx;
 			}
