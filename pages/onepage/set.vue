@@ -15,6 +15,8 @@
 				<switch name="switch" />
 			</view>
 		</view>
+		<view @click="exit()"><setitem title="退出"  ></setitem></view>
+		
 	</view>
 	
 </template>
@@ -25,6 +27,23 @@
 			components:{
 				setitem
 			},
+			methods:{
+				exit(){
+					console.log("退出触发")
+					uni.showModal({
+						content:"确定对出吗？"
+						,success:function(res){
+							if(res.confirm){
+								uni.clearStorageSync('token');
+								uni.reLaunch({
+									url: '../login/login'
+								})
+							}
+							
+						}
+					})
+				}
+			}
 		}
 	
 </script>

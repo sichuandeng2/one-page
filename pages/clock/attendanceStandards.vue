@@ -1,9 +1,9 @@
 <template>
 	<view class="attendance-page">
 		<view class="attendance-page-head">
-			<view class="attendance-page-head-circle">{{login.userName}}</view>
+			<view class="attendance-page-head-circle">{{user.name}}</view>
 			<view class="attendance-page-head-text">
-				<view class="attendance-page-head-text-username">{{login.userName}}</view>
+				<view class="attendance-page-head-text-username">{{user.name}}</view>
 				<view>
 					     
 				</view>
@@ -49,9 +49,21 @@
 
 <script>
 export default{
-	data(){
+	onLoad() {
+		this.user = uni.getStorageSync('user');
+		if (!this.user) {
+			uni.clearStorageSync('token');
+			uni.clearStorageSync('user');
+			uni.reLaunch({
+				url: '../login/login'
+			})
+		}
+		
+	}
+	,data(){
 		return{
-			login:{}
+			user:{}
+			,login:{}
 		}
 	}
 	,mounted() {

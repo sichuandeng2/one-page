@@ -15,7 +15,7 @@
 				<uni-icons type="contact-filled" color="#DCDCDC" size="45"></uni-icons>
 			</view>
 			<view class="datum-1">
-				<h3 class="myname" >{{name}}</h3>
+				<h3 class="myname" >{{user.name}}</h3>
 				<view>考勤组</view> 
 			</view>
 			<view class="card">
@@ -61,23 +61,24 @@
 	<!-- 外层最大盒子结束 -->
 </template> 
 <script>
-	// 折叠组件引用
-	// import uniCollapse from '@/components/uni-collapse/uni-collapse.vue';
-	// import uniCollapseItem from '@/components/uni-collapse-item/uni-collapse-item.vue';
-	// 图标组件引用
-	// import uniIcons from "@/components/uni-icons/uni-icons.vue";
-	export default {
-		// components: {
-			// uniCollapse,
-			// uniCollapseItem,
-			// uniIcons,
-		// }, // 组件注册
-		data() {
-			return {
-				name: '李四',
-			}
+export default{
+	onLoad() {
+		this.user = uni.getStorageSync('user');
+		if (!this.user) {
+			uni.clearStorageSync('token');
+			uni.clearStorageSync('user');
+			uni.reLaunch({
+				url: '../login/login'
+			})
+		}
+		
+	}
+	,data(){
+		return{
+			user:{}
 		}
 	}
+}
 </script>
 <style>
 	page{background-color: #FFFFFF;}

@@ -10,15 +10,15 @@
 				</view>
 				<view class="count-holder">
 					<view class="count-holder-item">
-						<view>{{login.AverageManHour}}</view>
+						<view>{{test.AverageManHour}}</view>
 						<view class="count-holder-item-text">平均工时(小时)</view>
 					</view>
 					<view class="count-holder-item">
-						<view>{{login.beLate}}</view>
+						<view>{{test.beLate}}</view>
 						<view class="count-holder-item-text">迟到(次)</view>
 					</view>
 					<view class="count-holder-item">
-						<view>{{login.leaveEarly}}</view>
+						<view>{{test.leaveEarly}}</view>
 						<view class="count-holder-item-text">早退(次)</view>
 					</view>
 				</view>
@@ -38,8 +38,9 @@
 					:showMonth = "false"
 					:start-date=startdate
 					:end-date=enddate
-					:selected=login.selected
+					:selected=test.selected
 					@change="change"
+					@monthSwitch="monthSwitch"
 					 />
 				</view>
 			</view>
@@ -53,12 +54,26 @@
 </template>
 
 <script>
+	import res from "../json/login.js";
 	import uniCalendar from "~@/../components/uni-calendar/uni-calendar.vue"; //日历挂载
 	export default {
 		components:{uniCalendar}
+		,onLoad() {
+			this.user = uni.getStorageSync('user');
+			if (!this.user) {
+				uni.clearStorageSync('token');
+				uni.clearStorageSync('user');
+				uni.reLaunch({
+					url: '../login/login'
+				})
+			}
+			//加载本地缓存
+			uni.setStorageSync('userinfo', res.data);
+		}
 	    ,data() {
 		   return {
-				login:{}, //获取登录信息
+			   test:{},
+				user:{}, //获取登录信息
 				startdate:null,	//月历开始日期
 				enddate:null,//月历结束日期
 				month:null,//当前月份
@@ -66,29 +81,15 @@
 			}
 		}
 		,methods:{
-			
-			open(){
-				this.$refs.popup.open()
-			}
-			,change(e){
-				console.log("点击日期");
-				
-				var dates = this.login.selected;
-				
-				console.log(dates);
-				
-				
-				for( var i in dates)
+			//点击日期
+			change(e){
+				var dates = this.test.selected;
+				for( var i=0 ;i< dates.length;i++)
 				{
-					console.log(dates[i].date);
-					console.log("数据为："+dates[i].date +"点击获取为："+e.fulldate);
 					if(e.fulldate==dates[i].date)
 					{
-						console.log(this.message);
 						this.message = dates[i].data.name;
 						console.log(this.message)
-						// console.log(dates[i].data.custom)
-						 
 						break;
 					}
 					else{
@@ -96,6 +97,7 @@
 					}
 				}
 			}
+			// 打卡记录
 			,details(){
 				uni.navigateTo({
 				    url:"../clock/details"
@@ -134,16 +136,21 @@
 				this.startdate = year +'-' +month+'-' +"1";
 				this.enddate = year + '-'+month+'-'+endday;
 			}
+			
+			//切换月历
+			,monthSwitch(res){
+				// console.log(JSON.stringify(res))
+			}
 		}
 	    ,mounted() {
 			// 设置日历日期
 			this.getdate();
 			
-			//加载登录数据
+			//调用本地缓存
 		    uni.getStorage({
 				key: 'userinfo',
 				success: (res) =>{
-					this.login=res.data.data;
+					this.test=res.data.data;
 					console.log(JSON.stringify(res.data.data));
 					
 				}

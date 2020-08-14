@@ -47,6 +47,12 @@
 			"style": {
 				"navigationBarTitleText": "打卡"
 			}
+		},
+		{
+			"path": "pages/clock/map",
+			"style": {
+				"navigationBarTitleText": "地图"
+			}
 		}
 	],
 	"globalStyle": {
