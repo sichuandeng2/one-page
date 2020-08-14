@@ -15,6 +15,7 @@
 				<switch name="switch" />
 			</view>
 		</view>
+		<view @click="position()"><setitem title="门店定位"  ></setitem></view>
 		<view @click="exit()"><setitem title="退出"  ></setitem></view>
 		
 	</view>
@@ -28,6 +29,7 @@
 				setitem
 			},
 			methods:{
+				//退出事件
 				exit(){
 					console.log("退出触发")
 					uni.showModal({
@@ -41,6 +43,12 @@
 							}
 							
 						}
+					})
+				}
+				//定位事件
+				,position(){
+					uni.navigateTo({
+						url: '../clock/map'
 					})
 				}
 			}

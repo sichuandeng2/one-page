@@ -10,22 +10,25 @@
 			 </map>
 		</view>
 		<view>
-			<veiw>
+			<view>
 				当前位置：{{address.localAdress}}
-			</veiw>
+			</view>
 			<view>经度：{{address.longitude}}</view>
 			<view>纬度：{{address.latitude}}</view>
 		</view>
+		<view><button @click="getPosition">点击提交</button></view>
 	</view>
 </template>
 
 <script>
+	import request from '@/utils/request.js'
 var getLocationInterval = null;
 export default{
 	data(){
 		return{
+			user:{}
 			//地址信息
-			address: {
+			,address: {
 				latitude: 1 //纬度
 				,longitude: 1 //经度
 				,localAdress: "当前地址获取失败" //当地名称
@@ -53,7 +56,18 @@ export default{
 			]
 		}
 	}
-	,onLoad(e) {
+	,onLoad() {
+		
+			this.user = uni.getStorageSync('user');
+			console.log(this.user);
+			// if (!this.user) {
+			// 	uni.clearStorageSync('token');
+			// 	uni.clearStorageSync('user');
+			// 	uni.reLaunch({
+			// 		url: '../login/login'
+			// 	})
+			// }
+			this.getLocation();
 		
 		// this.adress.latitude = e.latitude
 		// this.adress.longitude = e.longitude
@@ -98,12 +112,37 @@ export default{
 				}
 			});
 		}
+		,getPosition:function(){
+		
+			let params={
+				userName :this.user.username,//员工工号
+				longitude:this.address.longitude,//经度
+				latitude:this.address.latitude,//纬度
+			}
+			//发送登录请求
+			request.postJSON('/api/v1/login/login', JSON.stringify(params)).then(res => {
+				console.log(res)
+				if (res.code == 0) {
+					//提交成功
+					uni.showToast({
+						title:"提交成功",
+						icon: 'none'
+					})
+					// 跳转设置
+					uni.reLaunch({
+						url: '../onepage/set'
+					})
+				} else {
+					uni.showToast({
+						title: res.msg,
+						icon: 'none'
+					})
+				}
+			})
+		}
 		,onShow() {
 			// 计时器
 			console.log("定时器启动");
-		
-			this.getLocation();
-
 			getLocationInterval=setInterval(this.getLocation,5000);
 			
 			
