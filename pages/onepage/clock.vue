@@ -43,7 +43,7 @@
 	export default {
 		data() {
 			return {
-				isclock: true //锁定打卡	
+				isclock: false //锁定打卡	
 				,mark: "closeempty" //错误标记
 				,user: {}	//登录数据
 				,now: "" //当前时间

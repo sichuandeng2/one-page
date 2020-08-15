@@ -1,7 +1,7 @@
 <template>
-	<view>
-		<view>测试地图</view>
-		<view>
+	<view class="page">
+		<view class="head">测试地图</view>
+		<view class="map">
 			<map style="width: 100%; height: 500px;" 
 			 :latitude="address.latitude" 
 			 :longitude="address.longitude" 
@@ -9,7 +9,7 @@
 			 :circles="circles">
 			 </map>
 		</view>
-		<view>
+		<view class="info">
 			<view>
 				当前位置：{{address.localAdress}}
 			</view>
@@ -41,10 +41,9 @@ export default{
 					width:1,
 					height:1,
 					callout:{
-						content:"我在这"
+						content:"当前位置"
 					}
 				}
-				
 			],
 			circles:[
 				{
@@ -60,21 +59,9 @@ export default{
 		
 			this.user = uni.getStorageSync('user');
 			console.log(this.user);
-			// if (!this.user) {
-			// 	uni.clearStorageSync('token');
-			// 	uni.clearStorageSync('user');
-			// 	uni.reLaunch({
-			// 		url: '../login/login'
-			// 	})
-			// }
+			
 			this.getLocation();
 		
-		// this.adress.latitude = e.latitude
-		// this.adress.longitude = e.longitude
-		// ,this.circles[0]=e
-		// ,this.mark[0].latitude=e.latitude
-		// ,this.mark[0].longitude=e.longitude
-		// ,console.log(JSON.stringify(this.adress))
 	}
 	,methods:{
 		getLocation:function() {
@@ -103,7 +90,7 @@ export default{
 				},
 				fail: (res)=>{
 					console.log("地址获取失败");
-					// this.mark="closeempty";
+					
 					this.address.localAdress="地址获取失败";
 					uni.showToast({
 						title:'获取地址失败'
@@ -115,14 +102,16 @@ export default{
 		,getPosition:function(){
 		
 			let params={
-				userName :this.user.username,//员工工号
+				userNo :this.user.username,//员工工号
 				longitude:this.address.longitude,//经度
 				latitude:this.address.latitude,//纬度
 			}
 			//发送登录请求
-			request.postJSON('/api/v1/login/login', JSON.stringify(params)).then(res => {
-				console.log(res)
+			request.postJSON('/api/v1/storePositionConfig/setStoreJW', JSON.stringify(params))
+			.then(res => {
+				// console.log(res)
 				if (res.code == 0) {
+					// console.log("提交成功")
 					//提交成功
 					uni.showToast({
 						title:"提交成功",
@@ -133,17 +122,23 @@ export default{
 						url: '../onepage/set'
 					})
 				} else {
+					// console.log("提交失败")
 					uni.showToast({
-						title: res.msg,
+						title: "提交失败"+ res.status+res.error ,
 						icon: 'none'
 					})
 				}
 			})
+			.catch(error=>{
+				console.log("提交错误")
+				console.log(er)
+			})
+			
 		}
 		,onShow() {
 			// 计时器
 			console.log("定时器启动");
-			getLocationInterval=setInterval(this.getLocation,5000);
+			getLocationInterval=setInterval(this.getLocation,10000);
 			
 			
 		}
