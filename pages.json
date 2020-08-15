@@ -51,7 +51,7 @@
 		{
 			"path": "pages/clock/map",
 			"style": {
-				"navigationBarTitleText": "地图"
+				"navigationBarTitleText": "门店定位"
 			}
 		}
 	],

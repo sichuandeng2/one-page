@@ -2,10 +2,10 @@
 	<view class="clock-page">
 		<view class="clock-page-head">
 			<view class="clock-page-head-title">
-				上班打卡成功
+				{{clockMark}}打卡成功
 			</view>
 			<view class="clock-page-head-time">
-				打卡时间 {{clocktime}}
+				打卡时间 {{clockTime}}
 			</view>
 		</view>
 		<view class="clock-page-image">
@@ -30,7 +30,9 @@
 	export default{
 		data(){
 			return{
-				clocktime:null,
+				
+				clockTime:null,
+				clockMark:null
 			}
 		},
 		methods:{
@@ -41,7 +43,23 @@
 			}
 		},
 		onLoad(option) {
-			this.clocktime = option.clocktiem;
+			
+			this.clockTime = option.clockTiem;
+			console.log(option.clockMark)
+			
+			if(option.clockMark =='true')
+			{
+				this.clockMark ="上班"
+			}
+			else{
+				this.clockMark ="下班"
+			}
+			
+			
+		},
+		onShow() {
+		
+			
 		},
 		mounted() {
 			

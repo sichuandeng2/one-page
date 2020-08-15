@@ -1,8 +1,8 @@
 <template>
 	<view class="page">
-		<view class="head">测试地图</view>
+		<!-- <view class="head">定位地图</view> -->
 		<view class="map">
-			<map style="width: 100%; height: 500px;" 
+			<map style="width: 100%;height: 400px;" 
 			 :latitude="address.latitude" 
 			 :longitude="address.longitude" 
 			 :markers="mark"
@@ -15,8 +15,9 @@
 			</view>
 			<view>经度：{{address.longitude}}</view>
 			<view>纬度：{{address.latitude}}</view>
+			<view><button @click="getPosition">点击提交</button></view>
 		</view>
-		<view><button @click="getPosition">点击提交</button></view>
+		
 	</view>
 </template>
 
@@ -26,44 +27,43 @@ var getLocationInterval = null;
 export default{
 	data(){
 		return{
+			//用户信息
 			user:{}
 			//地址信息
 			,address: {
-				latitude: 1 //纬度
-				,longitude: 1 //经度
+				latitude: 1.111111 //纬度
+				,longitude: 1.111111 //经度
 				,localAdress: "当前地址获取失败" //当地名称
 			}
+			//标记地图
 			,mark:[
 				{
 					latitude:1,
 					longitude:1,
 					iconPath:'/static/logo.png',
-					width:1,
-					height:1,
 					callout:{
 						content:"当前位置"
 					}
 				}
 			],
+			// 画圆
 			circles:[
 				{
 					latitude:null,
 					longitude:null,
-					radius:2,
-					fillColor:"#dddddd"
+					radius:500,
+					fillColor:"#dddddd55"
 				}
 			]
 		}
 	}
 	,onLoad() {
-		
 			this.user = uni.getStorageSync('user');
-			console.log(this.user);
-			
 			this.getLocation();
 		
 	}
 	,methods:{
+		//获取地址事件
 		getLocation:function() {
 			uni.getLocation({
 				type: "gcj02",
@@ -88,9 +88,9 @@ export default{
 					console.log(this.address.localAdress);
 					console.log("经度:"+this.address.longitude+"纬度："+this.address.latitude);
 				},
+				//获取地址失败
 				fail: (res)=>{
 					console.log("地址获取失败");
-					
 					this.address.localAdress="地址获取失败";
 					uni.showToast({
 						title:'获取地址失败'
@@ -99,6 +99,7 @@ export default{
 				}
 			});
 		}
+		//定位事件
 		,getPosition:function(){
 		
 			let params={
@@ -111,7 +112,6 @@ export default{
 			.then(res => {
 				// console.log(res)
 				if (res.code == 0) {
-					// console.log("提交成功")
 					//提交成功
 					uni.showToast({
 						title:"提交成功",
@@ -129,17 +129,11 @@ export default{
 					})
 				}
 			})
-			.catch(error=>{
-				console.log("提交错误")
-				console.log(er)
-			})
-			
 		}
 		,onShow() {
 			// 计时器
 			console.log("定时器启动");
 			getLocationInterval=setInterval(this.getLocation,10000);
-			
 			
 		}
 		,onHide() {
@@ -152,5 +146,34 @@ export default{
 }
 </script>
 
-<style>
+<style lang="scss">
+	page{
+		background-color: #FFFFFF;
+	}
+	.page{
+		
+		.head{
+			margin: 0 38rpx;
+			text-align: center;
+			font-size: 38rpx;
+			padding: 30rpx 0;
+			font-weight: bolder;
+		}
+		.map{
+			
+		}
+		.info {
+			font-size: 36rpx;
+			margin: 28rpx 58rpx;
+			button{
+				
+				margin-top: 52rpx;
+				width: 510rpx;
+				border-radius: 25rpx;
+				font-size: 36rpx;
+				background-color: rgb(152, 208, 255);
+			}
+		}
+	}
+	
 </style>
