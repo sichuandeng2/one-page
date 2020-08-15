@@ -9,7 +9,7 @@
 			</view>
 		</view>
 		<view class="clock-page-image">
-			<image src="../../static/image/clockback.jpg"></image>
+			<image mode="widthFix" src="../../static/image/clockbk.jpg"></image>
 			
 		</view>
 		<view class="clock-page-foot">
@@ -93,9 +93,11 @@
 		.clock-page-image{
 			margin:  0 auto;
 			width: 99%;
+			height: 850rpx;
 			image{
-				width: 100%;
-				height: 850rpx;
+				// margin-top: 120rpx;
+				// width: 100%;
+				// height: 850rpx;
 				
 			}
 		}

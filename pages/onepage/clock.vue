@@ -75,6 +75,7 @@
 		methods: {
 			// 获取定位
 			getLocation:function() {
+				// #ifdef  APP-PLUS
 				uni.getLocation({
 					type: "gcj02", //国测局坐标
 					geocode:true, //允许解析
@@ -119,6 +120,7 @@
 						})
 					}
 				});
+				// #endif
 			}
 			//获取时间
 			,getTime:function(){
@@ -136,8 +138,12 @@
 			// 打卡事件
 			,clock() {
 				console.log("点击打卡");
-				// if(this.isLock)//判断当前打卡是否允许
+				// #ifdef APP-PLUS 
+				if(this.isLock)   //判断当前打卡是否允许
+				// #endif
+				// #ifdef H5	
 				if(true)
+				// #endif
 				{
 					if(this.clockMark)
 					{
