@@ -67,7 +67,6 @@ export default{
 	}
 	,methods:{
 		//获取地址事件
-		
 		getLocation:function() {
 			//#ifdef APP-PLUS
 			uni.getLocation({
@@ -106,23 +105,26 @@ export default{
 			//#endif
 		}
 		
-		//定位事件
+		//门店定位事件
 		,getPosition:function(){
-		
+			//配置参数
 			let params={
 				userNo :this.user.username,//员工工号
 				longitude:this.address.longitude,//经度
 				latitude:this.address.latitude,//纬度
 			}
 			//发送登录请求
-			request.postJSON('/api/v1/storePositionConfig/setStoreJW', JSON.stringify(params))
+			request.post('/api/v1/storePositionConfig/setStoreJW', params)
 			.then(res => {
-				// console.log(res)
+				uni.showToast({
+					title:res,
+					icon: 'none'
+				})
 				if (res.code == 0) {
 					//提交成功
 					uni.showToast({
 						title:"提交成功",
-						icon: 'none'
+						icon:"success"
 					})
 					// 跳转设置
 					uni.reLaunch({
@@ -132,7 +134,7 @@ export default{
 					// console.log("提交失败")
 					uni.showToast({
 						title: "提交失败"+ res.status+res.error ,
-						icon: 'none'
+						icon:"none"
 					})
 				}
 			})

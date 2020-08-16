@@ -45,14 +45,18 @@ let request = {
 		}
 	},
 	async postJSON(url, data) {
+	
 		var [error, res] = await uni.request({
 			url: server + url,
 			method: 'POST',
 			header: {
 				'Authorization': uni.getStorageSync('token'),
-			},
-			data: data ? data : {}
+			}
+			
+			,data: data ? data : {}
+			
 		});
+		
 		if (res.data.code == logout) {
 			uni.removeStorageSync('user');
 			uni.removeStorageSync('token');
