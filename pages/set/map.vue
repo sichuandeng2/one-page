@@ -11,6 +11,7 @@
 			 </map>
 			 <!-- #endif  -->
 		</view>
+		<!-- 位置信息 -->
 		<view class="info">
 			<view>
 				当前位置：{{address.localAdress}}
@@ -25,7 +26,7 @@
 
 <script>
 	import request from '@/utils/request.js'
-	var getLocationInterval = null;
+	var locatioMark = null;
 export default{
 	data(){
 		return{
@@ -63,7 +64,6 @@ export default{
 	,onLoad() {
 			this.user = uni.getStorageSync('user');
 			this.getLocation();
-		
 	}
 	,methods:{
 		//获取地址事件
@@ -116,19 +116,16 @@ export default{
 			//发送登录请求
 			request.post('/api/v1/storePositionConfig/setStoreJW', params)
 			.then(res => {
-				uni.showToast({
-					title:res,
-					icon: 'none'
-				})
 				if (res.code == 0) {
 					//提交成功
 					uni.showToast({
 						title:"提交成功",
 						icon:"success"
 					})
+					clearInterval(locatioMark);
 					// 跳转设置
 					uni.reLaunch({
-						url: '../onepage/set'
+						url: '../index/set'
 					})
 				} else {
 					// console.log("提交失败")
@@ -142,15 +139,13 @@ export default{
 		,onShow() {
 			// 计时器
 			console.log("定时器启动");
-			getLocationInterval=setInterval(this.getLocation,10000);
-			
+			locatioMark=setInterval(this.getLocation,10000);
 		}
 		,onHide() {
 			//清除定时器
 			console.log("定时器移除");
-			clearInterval(getLocationInterval);
+			clearInterval(locatioMark);
 		}
-		
 	}
 }
 </script>

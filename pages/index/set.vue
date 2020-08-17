@@ -48,7 +48,7 @@
 				//定位事件
 				,position(){
 					uni.navigateTo({
-						url: '../clock/map'
+						url: '../set/map'
 					})
 				}
 			}

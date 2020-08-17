@@ -68,7 +68,7 @@
 				})
 			}
 			//加载本地缓存
-			uni.setStorageSync('userinfo', res.data);
+			uni.setStorageSync('countInfo', res.data);
 		}
 	    ,data() {
 		   return {
@@ -133,7 +133,8 @@
 					})
 				}
 				this.month=month;
-				this.startdate = year +'-' +month+'-' +"1";
+				// this.startdate = year +'-' +month+'-' +"1";
+				this.startdate = "2000-1-1;"
 				this.enddate = year + '-'+month+'-'+endday;
 			}
 			
@@ -148,10 +149,10 @@
 			
 			//调用本地缓存
 		    uni.getStorage({
-				key: 'userinfo',
+				key: 'countInfo',
 				success: (res) =>{
 					this.test=res.data.data;
-					console.log(JSON.stringify(res.data.data));
+					// console.log(JSON.stringify(res.data.data));
 					
 				}
 			});

@@ -58,6 +58,9 @@
 		},
 		methods: {
 			login() {
+				uni.showLoading({
+				    title: '加载中'
+				});
 				if (this.username == '') {
 					uni.showToast({
 						title: '请输入工号',
@@ -78,7 +81,7 @@
 				}
 				//发送登录请求
 				request.post('/api/v1/login/login', params).then(res => {
-					console.log(res)
+					uni.hideLoading(); //取消加载
 					if (res.code == 0) {
 						// 本地存储token信息
 						uni.setStorageSync('token', res.data.token);
@@ -86,9 +89,10 @@
 						uni.setStorageSync('user', res.data.user);
 						// 跳转至app首页
 						uni.reLaunch({
-							url: '../onepage/clock'
+							url: '../index/index'
 						})
-					} else {
+					} 
+					else {
 						uni.showToast({
 							title: res.msg,
 							icon: 'none'
