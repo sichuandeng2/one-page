@@ -1,44 +1,43 @@
 {
-	"pages": [
-		{	//登录页面
+	"pages": [{ //登录页面
 			"path": "pages/login/login",
 			"style": {
-				"navigationStyle": "custom"  // 去掉原生导航栏
+				"navigationStyle": "custom" // 去掉原生导航栏
 			}
 		},
-		{	//打卡页面
+		{ //打卡页面
 			"path": "pages/index/index",
 			"style": {
 				"backgroundColor": " #FFFFFF",
 				"navigationBarTitleText": "打卡"
 			}
 		},
-		{	//统计页面
+		{ //统计页面
 			"path": "pages/clock/details",
 			"style": {
 				"backgroundColor": " #FFFFFF",
 				"navigationBarTitleText": "统计"
 			}
 		},
-		{	//设计页面
+		{ //设计页面
 			"path": "pages/index/set",
 			"style": {
 				"navigationBarTitleText": "设置"
 			}
 		},
-		{	//考勤标准页面
+		{ //考勤标准页面
 			"path": "pages/clock/attendanceStandards",
 			"style": {
 				"navigationBarTitleText": "考勤规则"
 			}
 		},
-		{	//打卡成功页面
+		{ //打卡成功页面
 			"path": "pages/clock/clockResult",
 			"style": {
 				"navigationBarTitleText": "打卡"
 			}
 		},
-		{	//门店定位页面
+		{ //门店定位页面
 			"path": "pages/set/map",
 			"style": {
 				"navigationBarTitleText": "门店定位"
@@ -63,22 +62,21 @@
 		"borderStyle": "black",
 		"backgroundColor": "#FFFFFF",
 		"list": [{
-				"pagePath": "pages/index/count",
-				"text": "统计",
-				"iconPath": "static/icon/myicon1.ico",
-				"selectedIconPath": "static/icon/myicon4.ico"
-			},
-			{
 				"pagePath": "pages/index/index",
 				"text": "打卡",
-				"iconPath": "static/icon/myicon2.ico",
-				"selectedIconPath": "static/icon/myicon5.ico"
+				"iconPath": "static/icon/icon1.png",
+				"selectedIconPath": "static/icon/icon1check.png"
+			}, {
+				"pagePath": "pages/index/count",
+				"text": "统计",
+				"iconPath": "static/icon/icon2.png",
+				"selectedIconPath": "static/icon/icon2check.png"
 			},
 			{
 				"pagePath": "pages/index/set",
 				"text": "设置",
-				"iconPath": "static/icon/myicon3.ico",
-				"selectedIconPath": "static/icon/myicon6.ico"
+				"iconPath": "static/icon/icon3.png",
+				"selectedIconPath": "static/icon/icon3check.png"
 			}
 		]
 	}

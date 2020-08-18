@@ -52,7 +52,7 @@
 			let token = uni.getStorageSync('token');
 			if (token) {
 				uni.reLaunch({
-					url: '../onepage/clock'
+					url: '../index/index'
 				})
 			}
 		},
