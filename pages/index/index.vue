@@ -56,8 +56,8 @@
 				,mark: "closeempty" //错误标记
 				,user: {}	//登录数据
 				,now: "" //当前时间
-				,startWork:null
-				,afterWork:null
+				,startWork:null//开始打卡时间
+				,afterWork:null//结束打卡时间
 				
 				//地址信息	
 				,address: {
@@ -104,13 +104,13 @@
 						
 						//当前位置
 						let parameter={
-							longitude:this.address.longitude
+							userNo :this.user.username//员工工号
+							,longitude:this.address.longitude
 							,latitude:this.address.latitude
 						}
 						// 获取打卡范围
-						request.post('待定',parameter)
+						request.post('/api/v1/employeePunchInOut/checkDistance',parameter)
 						.then(res=>{
-							//配置请求参数
 							let p={
 								longitudeMax:res.data.longitudeMax,//经度最大值
 								longitudeMin:res.data.longitudeMin,//经度最小值
@@ -157,7 +157,6 @@
 				minute<=9?minute= "0"+minute:minute;
 				second<=9?second= "0"+second:second;
 				this.now=hour+":"+minute+":"+second;	
-				// console.log(this.now);
 			}
 			
 			// 打卡事件
@@ -178,8 +177,7 @@
 						,latitude:this.address.latitude//纬度
 					}
 					
-					//该接口带替换，暂时采用 门店定位接口测试
-					request.post('/api/v1/storePositionConfig/setStoreJW',parameter)
+					request.post('/api/v1/employeePunchInOut/clock',parameter)
 					.then(res=>{
 						console.log(res)
 						if (res.code == 0) {//提交成功
@@ -287,7 +285,7 @@
 				text-align: center;
 				line-height: 100rpx;
 				color: #FFFFFF;
-				font-size: 32rpx;
+				font-size: 24rpx;
 				margin-left: 45rpx;
 				.page-info-circle-text {}
 			}

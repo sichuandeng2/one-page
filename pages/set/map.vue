@@ -2,6 +2,7 @@
 	<view class="page">
 		<!-- <view class="head">定位地图</view> -->
 		<view class="map">
+			
 			<!-- #ifdef APP-PLUS -->
 			<map style="width: 700rpx;height: 400px;" 
 			 :latitude="address.latitude" 
@@ -18,9 +19,12 @@
 			</view>
 			<view>经度：{{address.longitude}}</view>
 			<view>纬度：{{address.latitude}}</view>
-			<view><button @click="getPosition">点击提交</button></view>
+			<view class="info-distance">
+				<label>打卡范围：</label>
+				<input type="text"  v-model="distance" />
+			</view>
+			<view><button @click="psotPosition">点击提交</button></view>
 		</view>
-		
 	</view>
 </template>
 
@@ -38,6 +42,7 @@ export default{
 				,longitude: 1.111111 //经度
 				,localAdress: "当前地址获取失败" //当地名称
 			}
+			,distance:100
 			//标记地图
 			,mark:[
 				{
@@ -106,36 +111,57 @@ export default{
 		}
 		
 		//门店定位事件
-		,getPosition:function(){
-			//配置参数
-			let params={
+		,psotPosition:function(){
+			//配置定位参数
+			let positionParams={
 				userNo :this.user.username,//员工工号
 				longitude:this.address.longitude,//经度
 				latitude:this.address.latitude,//纬度
 			}
-			//发送登录请求
-			request.post('/api/v1/storePositionConfig/setStoreJW', params)
+			
+			//发送位置请求
+			request.post('/api/v1/storePositionConfig/setStoreJW', positionParams)
 			.then(res => {
 				if (res.code == 0) {
-					//提交成功
-					uni.showToast({
-						title:"提交成功",
-						icon:"success"
+					//配置距离参数
+					let distanceParams={
+						userNo :this.user.username,
+						distance:this.distance //设置打卡范围
+					}
+					
+					//设置范围请求
+					request.post('/api/v1/storePositionConfig/setDistance',distanceParams)
+					.then(res=>{
+						if (res.code == 0) {
+							//提交成功
+							uni.showToast({
+								title:"提交成功",
+								icon:"success"
+							})
+							clearInterval(locatioMark);
+								uni.reLaunch({
+									url: '../index/set'
+								})
+						}
+						else{
+							uni.showToast({
+								title: "设置范围失败"+ res.status+res.error ,
+								icon:"none"
+							})
+						}
 					})
-					clearInterval(locatioMark);
-					// 跳转设置
-					uni.reLaunch({
-						url: '../index/set'
-					})
-				} else {
+				}
+				else{
 					// console.log("提交失败")
 					uni.showToast({
-						title: "提交失败"+ res.status+res.error ,
+						title: "位置信息提交失败"+ res.status+res.error ,
 						icon:"none"
 					})
 				}
 			})
+			
 		}
+		
 		,onShow() {
 			// 计时器
 			console.log("定时器启动");
@@ -155,7 +181,6 @@ export default{
 		background-color: #FFFFFF;
 	}
 	.page{
-		
 		.head{
 			margin: 0 38rpx;
 			text-align: center;
@@ -165,12 +190,25 @@ export default{
 		}
 		.map{
 			text-align: center;
+			height:400rpx;
 		}
 		.info {
 			font-size: 36rpx;
 			margin: 28rpx 58rpx;
+		
+			.info-distance {
+				margin-top: 28rpx;
+				input{
+					background-color: rgb(255, 255, 255);
+					border: 1px solid #000000;
+					height: 35px;
+					font-size: 36rpx;
+					display: inline-block;
+					width: 300rpx;
+					vertical-align: middle;
+				}
+			}
 			button{
-				
 				margin-top: 52rpx;
 				width: 510rpx;
 				border-radius: 25rpx;
