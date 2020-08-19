@@ -54,7 +54,7 @@
 </template>
 
 <script>
-	import res from "../json/login.js";
+	import res from "../../json/login.js";
 	import uniCalendar from "~@/../components/uni-calendar/uni-calendar.vue"; //日历挂载
 	export default {
 		components:{uniCalendar}

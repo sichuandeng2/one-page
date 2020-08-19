@@ -9,7 +9,7 @@
 				<view style="font-weight: 800;font-size: 32rpx;">{{user.name}}</view>
 				<view @click="gotoAttendance()" style="padding-top: 10rpx;color: #666;">
 					<text>考勤</text>
-					<uni-icons type="arrowright" size="15" style="color: #666;"></uni-icons>
+					<uni-icons type="arrowright" size="12" style="color: #666;"></uni-icons>
 				</view>
 			</view>
 		</view>
@@ -168,13 +168,17 @@
 				text-align: left;
 				padding-left: 20rpx;
 				font-size: 28rpx;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				
 			}
 
 			.page-info-circle {
 				width: 100rpx;
 				height: 100rpx;
 				border-radius: 50%;
-				background-color: rgb(0, 157, 254);
+				background-color: #009DFE;
 				text-align: center;
 				line-height: 100rpx;
 				color: #FFFFFF;

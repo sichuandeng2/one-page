@@ -7,7 +7,7 @@
 		</view>
 		
 		<view class="page-right" >
-			<text v-text="itemtext"></text>
+			<view class="page-right-itemtext" v-text="itemtext"></view>
 			<uniIcons type="arrowright" size="18"></uniIcons>
 			</view>
 		
@@ -44,26 +44,28 @@
 <style lang="scss">
 	.page{
 		width:720rpx;
-		height:120rpx;
+		height:100rpx;
 		background-color: #FFFFFF;
 		display:inline-flex;
 		justify-content: space-between;
 		border-radius: 25rpx;
-		margin: 30rpx 15rpx 0rpx 15rpx;
+		margin: 30rpx 12rpx 0rpx 12rpx;
+		line-height: 100rpx;
 		.page-left{
-			padding-left: 30rpx;
+			padding-left: 28rpx;
+			font-size: 32rpx;
 			.page-left-title{
-				line-height: 120rpx;
-			}
-			// .page-left-item{
-			// 	color: #6E6E6E;
-			// }
+				line-height: 100rpx;
+			}			
 		}
 		.page-right{
 			// background-color: #00FF11;
 			font-size: 28rpx;
-			line-height: 120rpx;
-			padding-right: 38rpx;
+			line-height: 100rpx;
+			padding-right: 25rpx;
+			.page-right-itemtext{
+				padding-right: 10rpx;
+			}
 		}
 	}
 </style>

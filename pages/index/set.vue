@@ -8,7 +8,7 @@
 					<text >打卡结果确认</text>
 				</view>
 				<view class="page-item-left-item">
-					<text>每天打卡结束后，自动发送全天考勤结果</text>
+					每天打卡结束后，自动发送全天考勤结果
 				</view>
 			</view>
 			<view class="page-item-right">
@@ -65,25 +65,32 @@
 			border-radius: 25rpx;
 			margin: 30rpx 15rpx 0rpx 15rpx;
 			background-color: #FFFFFF;
-			display:inline-flex;
+			display:flex;
+			flex-direction: row;
 			justify-content: space-between;
+			align-items: center;
 			
 			.page-item-left{
-					padding-left: 30rpx;
+				height:100rpx;
+				display:flex;
+				flex-direction: column;
+				justify-content: space-between;
+				padding-left: 28rpx;
 					.page-item-left-title{
-						height: 60rpx;
+						height: 50rpx;
 						line-height: 80rpx;
+						font-size: 32rpx;
 					}
 					.page-item-left-item{
 						color: #6E6E6E;
 						font-size: 26rpx;
-						height: 60rpx;
+						height: 50rpx;
+						margin-top: 10rpx;
 					}
 				}
 				.page-item-right{
 					font-size: 28rpx;
-					line-height: 120rpx;
-					padding-right: 38rpx;
+					padding-right: 26rpx;
 				}
 			
 		}

@@ -14,20 +14,22 @@
 				<!-- 工号 -->
 				<view class="login-form-item ">
 					<view class="login-form-item-label">
-						<text>工号</text>
-					</view>
-					<view class="login-form-item-label">
-						<input class="put" v-model="username" placeholder="请输入工号" />
+						<view class="login-form-item-label-icon">
+							<uni-icons type="person-filled" size="22" style="color: #666;"></uni-icons>
+						</view>
+						<input  v-model="username" placeholder="工号" ></input>
 					</view>
 				</view>
 
 				<!-- 密码 -->
 				<view class="login-form-item">
+					
 					<view class="login-form-item-label">
-						<text>密码</text>
-					</view>
-					<view class="login-form-item-label">
-						<input v-model="password" class="put" placeholder="请输入密码" password="true" />
+						<view class="login-form-item-label-icon">
+							<uni-icons type="locked-filled" size="22" style="color: #666;"></uni-icons>
+						</view>
+						<input v-model="password" placeholder="密码" password="true" />
+						
 					</view>
 				</view>
 				<view class="login-form-item">
@@ -114,25 +116,27 @@
 	.login-page {
 		width: 510rpx;
 		margin: 0 auto;
-
+		// text-align: center;
 		//头信息样式
 		.login-header {
-			height: 190rpx;
+			height: 320rpx;
 			padding: 18rpx 0rpx;
-			margin-bottom: 120rpx;
+			margin-bottom: 220rpx;
 			margin-top: 238rpx;
-
+			display: flex;
+			flex-direction: column;
+			align-items: center;
 			//图标样式
 			.login-header-icon {
-				width: 128rpx;
-				height: 128rpx;
+				width: 250rpx;
+				height: 250rpx;
 				border-radius: 50%;
-				background-color: rgb(0, 157, 254);
+				background-color: #009DFE;
 				color: #FFFFFF;
-				font-size: 32rpx;
+				font-size: 60rpx;
 				text-align: center;
-				line-height: 128rpx;
-				margin-bottom: 38rpx;
+				line-height: 250rpx;
+				margin-bottom: 88rpx;
 			}
 		}
 
@@ -141,22 +145,32 @@
 
 			//表单项样式
 			.login-form-item {
-				padding: 10px 0px;
-
+				padding: 12rpx 0rpx;
 				button {
-					background-color: rgb(152, 208, 255);
-					border-radius: 25rpx;
+					background-color: #009DFE;
+					border-radius: 8rpx;
 					font-size: 36rpx;
+					color: #FFFFFF;
+					width: 520rpx;
+					margin-top: 50rpx;
 				}
 
 				.login-form-item-label {
 					font-size: 28rpx;
-
-					.put {
-						background-color: rgb(255, 255, 255);
-						border-bottom: 1px solid #000000;
-						height: 35px;
-						font-size: 36rpx;
+					display: inline-flex;
+					justify-content: flex-start;
+					align-items: center;
+					border: 1px solid #000000;
+					border-radius: 8rpx;
+					width: 515rpx;
+					input {
+						height: 25px;
+						font-size: 28rpx;
+						padding: 12rpx 0rpx;
+						
+					}
+					.login-form-item-label-icon{
+						margin:0  15rpx;
 					}
 				}
 			}

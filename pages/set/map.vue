@@ -1,30 +1,37 @@
 <template>
 	<view class="page">
-		<!-- <view class="head">定位地图</view> -->
-		<view class="map">
+		<view class="page-map">
 			
 			<!-- #ifdef APP-PLUS -->
-			<map style="width: 700rpx;height: 400px;" 
-			 :latitude="address.latitude" 
-			 :longitude="address.longitude" 
+			<map style="width: 700rpx;height: 600rpx;" 
+			 :latitude="latitude" 
+			 :longitude="longitude" 
 			 :markers="mark"
 			 :circles="circles">
 			 </map>
 			 <!-- #endif  -->
 		</view>
 		<!-- 位置信息 -->
-		<view class="info">
-			<view>
-				当前位置：{{address.localAdress}}
+		<view class="page-info">
+		
+			<view class="page-info-text">
+				<view class="page-info-text-item">当前位置：{{localAdress}}</view>
+				<view class="page-info-text-item">经度：{{longitude}}</view>
+				<view class="page-info-text-item">纬度：{{latitude}}</view>
 			</view>
-			<view>经度：{{address.longitude}}</view>
-			<view>纬度：{{address.latitude}}</view>
-			<view class="info-distance">
-				<label>打卡范围：</label>
-				<input type="text"  v-model="distance" />
+			<view class="page-info-distance">
+				<view class="page-info-distance-input">
+					<view class="page-info-distance-input-icon">
+						<uni-icons type="map-pin-ellipse" size="22" style="color: #666;"></uni-icons>
+					</view>
+					<input type="text"  v-model="circles[0].radius" placeholder="请输入打卡范围" />
+				</view>
 			</view>
-			<view><button @click="psotPosition">点击提交</button></view>
+			<view class="page-info-sub">
+				<button @click="psotPosition">点击提交</button>
+			</view>
 		</view>
+		
 	</view>
 </template>
 
@@ -37,12 +44,10 @@ export default{
 			//用户信息
 			user:{}
 			//地址信息
-			,address: {
-				latitude: 1.111111 //纬度
-				,longitude: 1.111111 //经度
-				,localAdress: "当前地址获取失败" //当地名称
-			}
-			,distance:100
+			,latitude: null //纬度
+			,longitude: null //经度
+			,localAdress: "当前地址获取失败" //当地名称
+			
 			//标记地图
 			,mark:[
 				{
@@ -59,7 +64,7 @@ export default{
 				{
 					latitude:null,
 					longitude:null,
-					radius:200,
+					radius:100,
 					fillColor:"#dddddd55"
 				}
 			]
@@ -78,29 +83,23 @@ export default{
 				type: "gcj02",
 				geocode:true,
 				success:  (res) =>{
-					var getAddress = res.address.country+//国家
-					res.address.province+//省份名称
-					res.address.city+//城市名称
-					res.address.district+//区（县）名称
-					res.address.street+//街道信息
-					res.address.streetNum;//获取街道门牌号信息
 					
-					this.address.localAdress=getAddress + "，当前精度："+res.accuracy+"米,POI信息:"+res.address.poiName;
-					this.address.longitude=res.longitude;
-					this.address.latitude = res.latitude;
+					this.localAdress=res.address.poiName;
+					this.longitude=res.longitude;
+					this.latitude = res.latitude;
 					
 					this.mark[0].latitude=res.latitude;
 					this.mark[0].longitude=res.longitude;
 					
 					this.circles[0].latitude=res.latitude;
 					this.circles[0].longitude=res.longitude;
-					console.log(this.address.localAdress);
-					console.log("经度:"+this.address.longitude+"纬度："+this.address.latitude);
+					console.log(this.localAdress);
+					console.log("经度:"+this.longitude+"纬度："+this.latitude);
 				},
 				//获取地址失败
 				fail: (res)=>{
 					console.log("地址获取失败");
-					this.address.localAdress="地址获取失败";
+					this.localAdress="地址获取失败";
 					uni.showToast({
 						title:'获取地址失败'
 						,icon: "none"
@@ -115,8 +114,8 @@ export default{
 			//配置定位参数
 			let positionParams={
 				userNo :this.user.username,//员工工号
-				longitude:this.address.longitude,//经度
-				latitude:this.address.latitude,//纬度
+				longitude:this.longitude,//经度
+				latitude:this.latitude,//纬度
 			}
 			
 			//发送位置请求
@@ -126,7 +125,7 @@ export default{
 					//配置距离参数
 					let distanceParams={
 						userNo :this.user.username,
-						distance:this.distance //设置打卡范围
+						distance:this.circles[0].radius //设置打卡范围
 					}
 					
 					//设置范围请求
@@ -181,39 +180,52 @@ export default{
 		background-color: #FFFFFF;
 	}
 	.page{
-		.head{
-			margin: 0 38rpx;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		.page-map{
 			text-align: center;
-			font-size: 38rpx;
-			padding: 30rpx 0;
-			font-weight: bolder;
+			height:600rpx;
+			width: 700rpx;
 		}
-		.map{
-			text-align: center;
-			height:400rpx;
-		}
-		.info {
+		.page-info {
 			font-size: 36rpx;
-			margin: 28rpx 58rpx;
-		
-			.info-distance {
-				margin-top: 28rpx;
-				input{
-					background-color: rgb(255, 255, 255);
+			width: 700rpx;
+			height: 650rpx;
+			
+			.page-info-distance {
+				display: flex;
+				justify-content: center;
+				.page-info-distance-input{
+					display: flex;
 					border: 1px solid #000000;
-					height: 35px;
-					font-size: 36rpx;
-					display: inline-block;
-					width: 300rpx;
-					vertical-align: middle;
+					border-radius: 8rpx;
+					width: 515rpx;
+					padding: 8rpx;
+					.page-info-distance-input-icon{
+						padding:  0 20rpx;
+					}
 				}
 			}
-			button{
-				margin-top: 52rpx;
-				width: 510rpx;
-				border-radius: 25rpx;
-				font-size: 36rpx;
-				background-color: rgb(152, 208, 255);
+			
+			.page-info-text{
+				margin: 55rpx;
+				.page-info-text-item{
+				
+					padding-left: 88rpx;
+					padding: 15rpx ;
+				}
+			}
+			.page-info-sub{
+				button {
+					background-color: #009DFE;
+					border-radius: 8rpx;
+					font-size: 36rpx;
+					color: #FFFFFF;
+					width: 520rpx;
+					margin-top: 50rpx;
+				}
+				
 			}
 		}
 	}
