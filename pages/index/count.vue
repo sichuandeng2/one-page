@@ -54,10 +54,10 @@
 </template>
 
 <script>
-	import res from "../../json/login.js";
+	// import res from "../../json/login.js";
 	import uniCalendar from "~@/../components/uni-calendar/uni-calendar.vue"; //日历挂载
 	export default {
-		components:{uniCalendar}
+		components:{uniCalendar} 
 		,onLoad() {
 			this.user = uni.getStorageSync('user');
 			if (!this.user) {
@@ -68,7 +68,7 @@
 				})
 			}
 			//加载本地缓存
-			uni.setStorageSync('countInfo', res.data);
+			// uni.setStorageSync('countInfo', res.data);
 		}
 	    ,data() {
 		   return {

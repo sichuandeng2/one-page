@@ -80,12 +80,17 @@
 						}
 						// 获取打卡范围
 						request.get('/api/v1/employeePunchInOut/checkDistance', parameter).then(res => {
-							if (res.data.gap > res.data.distance) {
+							if (res.code == '0') {
+								if (res.data.gap > res.data.distance) {
+									//设定打卡限制,不能打卡
+									this.flag = false
+								} else {
+									//解除打卡限制,允许打卡
+									this.flag = true
+								}
+							} else {
 								//设定打卡限制,不能打卡
 								this.flag = false
-							} else {
-								//解除打卡限制,允许打卡
-								this.flag = true
 							}
 						})
 					}
@@ -171,7 +176,7 @@
 				display: flex;
 				flex-direction: column;
 				align-items: center;
-				
+
 			}
 
 			.page-info-circle {
