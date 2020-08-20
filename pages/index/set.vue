@@ -16,7 +16,7 @@
 			</view>
 		</view>
 		<view @click="position()">
-			<setitem title="门店定位"></setitem>
+			<setitem title="门店定位" v-show="isposition"></setitem>
 		</view>
 		<view @click="exit()">
 			<setitem title="退出"></setitem>
@@ -25,15 +25,32 @@
 </template>
 
 <script>
+	import request from '@/utils/request.js';
 	import setitem from "../components/setItem.vue";
 	export default {
 		components: {
 			setitem
 		},
+		data(){
+			return{
+				user: {},
+				isposition:false
+			}
+		},
+		onLoad(){
+			this.user = uni.getStorageSync('user');
+			if (!this.user) {
+				uni.clearStorageSync('token');
+				uni.clearStorageSync('user');
+				uni.reLaunch({
+					url: '../login/login'
+				})
+			}
+			this.storeManager();
+		},
 		methods: {
 			//退出事件
 			exit() {
-				console.log("退出触发")
 				uni.showModal({
 					content: "确定退出吗？",
 					success: function(res) {
@@ -51,8 +68,29 @@
 				uni.navigateTo({
 					url: '../set/map'
 				})
+			},
+			storeManager(){
+				let parameter={
+					no:this.user.username
+				}
+				// 获取打卡范围
+				request.get('/api/v1/storeManager/menuShowToManager', parameter).then(res => {
+					if (res.code == '0') {
+						if (res.data) {
+							this.isposition=true
+						} else {
+							this.isposition=false
+						}
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: "none"
+						})
+					}
+				})
 			}
 		}
+		
 	}
 </script>
 

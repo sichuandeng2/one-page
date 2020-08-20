@@ -1,22 +1,21 @@
 <template>
 	<view class="page">
 		<view class="page-map">
-			<map style="width: 700rpx;height: 600rpx;" :latitude="latitude" :longitude="longitude" :markers="mark" :circles="circles">
+			<map style="width: 750rpx;height: 1000rpx;" :latitude="latitude" :longitude="longitude" :markers="mark" :circles="circles"
+			 :scale=18>
 			</map>
 		</view>
 		<!-- 位置信息 -->
 		<view class="page-info">
 			<view class="page-info-text">
 				<view class="page-info-text-item">当前位置：{{localAdress}}</view>
-				<view class="page-info-text-item">经度：{{longitude}}</view>
-				<view class="page-info-text-item">纬度：{{latitude}}</view>
 			</view>
 			<view class="page-info-distance">
 				<view class="page-info-distance-input">
 					<view class="page-info-distance-input-icon">
 						<uni-icons type="map-pin-ellipse" size="22" style="color: #666;"></uni-icons>
 					</view>
-					<input type="text" v-model="circles[0].radius" placeholder="请输入打卡范围" />
+					<input type="text" v-model.number="circles[0].radius" placeholder="请输入打卡范围(单位米)" />
 				</view>
 			</view>
 			<view class="page-info-sub">
@@ -51,7 +50,7 @@
 				circles: [{
 					latitude: null,
 					longitude: null,
-					radius: 100,
+					radius: null,
 					fillColor: "#dddddd55"
 				}],
 				match: true
@@ -97,6 +96,15 @@
 			},
 			//门店定位事件
 			commit() {
+				//非空验证
+				if(this.circles[0].radius==null ||this.circles[0].radius=="")
+				{
+					uni.showToast({
+						title: '打卡范围不能为空',
+						icon: 'none'
+					})
+					return;
+				}
 				//配置定位参数
 				let positionParams = {
 					userNo: this.user.username, //员工工号
@@ -104,7 +112,6 @@
 					latitude: this.latitude, //纬度
 					distance: this.circles[0].radius
 				}
-
 				//发送位置请求
 				request.post('/api/v1/storePositionConfig/setStoreJW', positionParams)
 					.then(res => {
@@ -140,25 +147,26 @@
 
 		.page-map {
 			text-align: center;
-			height: 600rpx;
-			width: 700rpx;
+			height: 1000rpx;
+			width: 750rpx;
 		}
 
 		.page-info {
 			font-size: 36rpx;
 			width: 700rpx;
 			height: 650rpx;
-
 			.page-info-distance {
 				display: flex;
 				justify-content: center;
 
 				.page-info-distance-input {
 					display: flex;
+					align-items: center;
 					border: 1px solid #000000;
 					border-radius: 8rpx;
-					width: 515rpx;
+					width: 500rpx;
 					padding: 8rpx;
+					height: 65rpx;
 
 					.page-info-distance-input-icon {
 						padding: 0 20rpx;
@@ -167,12 +175,14 @@
 			}
 
 			.page-info-text {
-				margin: 55rpx;
-
+				
+				display:flex;
+				justify-content: center;
+				margin-top: 58rpx;
+				margin-bottom: 28rpx;
 				.page-info-text-item {
-
-					padding-left: 88rpx;
-					padding: 15rpx;
+					width: 515rpx;
+					
 				}
 			}
 

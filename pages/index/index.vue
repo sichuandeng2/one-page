@@ -48,8 +48,7 @@
 			}
 		},
 		onLoad() {
-			clearInterval(timeInterval);
-			clearInterval(locationInterval);
+			
 			this.user = uni.getStorageSync('user');
 			if (!this.user) {
 				uni.clearStorageSync('token');
@@ -62,6 +61,10 @@
 			this.getLocation();
 			timeInterval = setInterval(this.getTime, 1000);
 			locationInterval = setInterval(this.getLocation, 5000);
+		},
+		onUnload() {
+			clearInterval(timeInterval);
+			clearInterval(locationInterval);
 		},
 		methods: {
 			// 获取定位

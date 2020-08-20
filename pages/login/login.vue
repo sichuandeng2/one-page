@@ -33,7 +33,7 @@
 					</view>
 				</view>
 				<view class="login-form-item">
-					<button @click="login()">登录</button>
+					<button @click="login()"><text space="emsp">登  录</text></button>
 				</view>
 			</form>
 		</view>
@@ -149,7 +149,7 @@
 				button {
 					background-color: #009DFE;
 					border-radius: 8rpx;
-					font-size: 36rpx;
+					font-size: 42rpx;
 					color: #FFFFFF;
 					width: 520rpx;
 					margin-top: 50rpx;
@@ -165,7 +165,7 @@
 					width: 515rpx;
 					input {
 						height: 25px;
-						font-size: 28rpx;
+						font-size: 32rpx;
 						padding: 12rpx 0rpx;
 						
 					}
