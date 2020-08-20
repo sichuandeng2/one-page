@@ -61,6 +61,7 @@
 					url: '../login/login'
 				})
 			}
+			
 		},
 		data() {
 			return {
@@ -69,14 +70,14 @@
 					beLate: 0,
 					leaveEarly: 0,
 					selected: [{
-							date: "2020-8-20",
+							date: "2020-08-20",
 							info: "打卡",
 							data: {
 								message: "打卡8小时"
 							}
 						},
 						{
-							date: "2020-8-21",
+							date: "2020-08-21",
 							info: "未打卡",
 							data: {
 								message: "打卡0小时"
@@ -95,10 +96,11 @@
 			//点击日期
 			change(e) {
 				var dates = this.test.selected;
+			
 				for (var i = 0; i < dates.length; i++) {
+						console.log(e.fulldate)
 					if (e.fulldate == dates[i].date) {
 						this.message = dates[i].data.message;
-						console.log(this.message)
 						break;
 					} else {
 						this.message = "无打卡记录";

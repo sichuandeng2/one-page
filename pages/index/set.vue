@@ -69,6 +69,7 @@
 					url: '../set/map'
 				})
 			},
+			//检查当前用户是否具有门店定位的权限
 			storeManager(){
 				let parameter={
 					no:this.user.username

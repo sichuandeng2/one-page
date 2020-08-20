@@ -119,9 +119,9 @@
 		// text-align: center;
 		//头信息样式
 		.login-header {
-			height: 320rpx;
+			height: 380rpx;
 			padding: 18rpx 0rpx;
-			margin-bottom: 220rpx;
+			margin-bottom: 180rpx;
 			margin-top: 238rpx;
 			display: flex;
 			flex-direction: column;
@@ -135,6 +135,7 @@
 				color: #FFFFFF;
 				font-size: 60rpx;
 				text-align: center;
+				margin: 0 auto;
 				line-height: 250rpx;
 				margin-bottom: 88rpx;
 			}
