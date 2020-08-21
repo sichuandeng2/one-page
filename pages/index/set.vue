@@ -117,21 +117,23 @@
 
 				.page-item-left-title {
 					height: 50rpx;
-					line-height: 80rpx;
+					line-height: 50rpx;
 					font-size: 32rpx;
+					margin-top: 3rpx;
+					// border: 1rpx solid #007AFF;
 				}
 
 				.page-item-left-item {
 					color: #6E6E6E;
 					font-size: 26rpx;
 					height: 50rpx;
-					margin-top: 10rpx;
+					margin-top: 3rpx;
 				}
 			}
 
 			.page-item-right {
 				font-size: 28rpx;
-				padding-right: 26rpx;
+				padding-right: 28rpx;
 			}
 
 		}

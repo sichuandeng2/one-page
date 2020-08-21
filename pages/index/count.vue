@@ -118,35 +118,39 @@
 			,
 			getdate() {
 				//获取月历的开始和结束日期
-				var now = new Date();
-				var year = now.getFullYear();
-				var month = now.getMonth() + 1;
-				var day = now.getDate();
-				var lmon = [1, 3, 5, 7, 8, 10, 12]; //大月
-				var smon = [4, 6, 9, 11]; //小月
-				var endday = 28; //2月
-				if (month == 2) //是否为2月
-				{
-					//四年一闰，百年不闰，四百年又闰
-					if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0)
-						endday = 29;
-					else {
-						endday = 28;
-					}
-				} else {
+				// var now = new Date();
+				// var year = now.getFullYear();
+				// var month = now.getMonth() + 1;
+				// var day = now.getDate();
+				// var lmon = [1, 3, 5, 7, 8, 10, 12]; //大月
+				// var smon = [4, 6, 9, 11]; //小月
+				// var endday = 28; //2月
+				// if (month == 2) //是否为2月
+				// {
+				// 	//四年一闰，百年不闰，四百年又闰
+				// 	if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0)
+				// 		endday = 29;
+				// 	else {
+				// 		endday = 28;
+				// 	}
+				// } else {
+				
+					// if( lmon.some((value) =>value==month) endday = 31;
+					// if( smon.some((value) =>value==month) endday = 30;
 					//是否为大月
-					lmon.forEach((i) => {
-						if (i === month) endday = 31;
-					})
+					// lmon.some((value) => {
+					// 	return value==month
+					// 	if (i === month) endday = 31;
+					// })
 					//是否为小月
-					smon.forEach((i) => {
-						if (i === month) endday = 30;
-					})
-				}
-				this.month = month;
-				// this.startdate = year +'-' +month+'-' +"1";
-				this.startdate = "2000-1-1;"
-				this.enddate = year + '-' + month + '-' + endday;
+					// smon.forEach((i) => {
+					// 	if (i === month) endday = 30;
+					// })
+				// }
+				// this.month = month;
+				// // this.startdate = year +'-' +month+'-' +"1";
+				// this.startdate = "2000-1-1;"
+				// this.enddate = year + '-' + month + '-' + endday;
 			}
 
 			//切换月历

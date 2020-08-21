@@ -49,7 +49,7 @@
 		display:inline-flex;
 		justify-content: space-between;
 		border-radius: 25rpx;
-		margin: 30rpx 12rpx 0rpx 12rpx;
+		margin: 30rpx 15rpx 0rpx 15rpx;
 		line-height: 100rpx;
 		.page-left{
 			padding-left: 28rpx;
@@ -62,7 +62,7 @@
 			// background-color: #00FF11;
 			font-size: 28rpx;
 			line-height: 100rpx;
-			padding-right: 25rpx;
+			padding-right: 28rpx;
 			.page-right-itemtext{
 				padding-right: 10rpx;
 			}

@@ -58,9 +58,10 @@
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "rgb(50,178,218)",
+		"selectedColor": "#009DFE",
 		"borderStyle": "black",
 		"backgroundColor": "#FFFFFF",
+		"fontSize":"16px",
 		"list": [{
 				"pagePath": "pages/index/index",
 				"text": "打卡",
