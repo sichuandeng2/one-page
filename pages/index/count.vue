@@ -53,6 +53,8 @@
 			uniCalendar
 		},
 		onLoad() {
+
+			//  加载用户信息
 			this.user = uni.getStorageSync('user');
 			if (!this.user) {
 				uni.clearStorageSync('token');
@@ -61,10 +63,11 @@
 					url: '../login/login'
 				})
 			}
-			
 		},
 		data() {
 			return {
+
+				//  考勤信息
 				test: {
 					AverageManHour: 0,
 					beLate: 0,
@@ -85,20 +88,26 @@
 						}
 					]
 				},
-				user: {}, //获取登录信息
-				startdate: null, //月历开始日期
-				enddate: null, //月历结束日期
-				month: null, //当前月份
-				message: "无打卡记录" //日期排班信息
+				//  获取登录信息
+				user: {},
+				//  月历开始日期
+				startdate: null,
+				//  月历结束日期
+				enddate: null,
+				//  当前月份 
+				month: null,
+				//  日期排班信息
+				message: "无打卡记录"
 			}
 		},
 		methods: {
-			//点击日期
+
+			//  点击日期
 			change(e) {
 				var dates = this.test.selected;
-			
+
 				for (var i = 0; i < dates.length; i++) {
-						console.log(e.fulldate)
+					console.log(e.fulldate)
 					if (e.fulldate == dates[i].date) {
 						this.message = dates[i].data.message;
 						break;
@@ -106,62 +115,21 @@
 						this.message = "无打卡记录";
 					}
 				}
-			}
+			},
+
 			// 打卡记录
-			,
 			details() {
 				uni.navigateTo({
 					url: "../clock/details"
 				});
-			}
-			// 设置日历日期
-			,
-			getdate() {
-				//获取月历的开始和结束日期
-				// var now = new Date();
-				// var year = now.getFullYear();
-				// var month = now.getMonth() + 1;
-				// var day = now.getDate();
-				// var lmon = [1, 3, 5, 7, 8, 10, 12]; //大月
-				// var smon = [4, 6, 9, 11]; //小月
-				// var endday = 28; //2月
-				// if (month == 2) //是否为2月
-				// {
-				// 	//四年一闰，百年不闰，四百年又闰
-				// 	if (year % 4 === 0 && year % 100 !== 0 || year % 400 === 0)
-				// 		endday = 29;
-				// 	else {
-				// 		endday = 28;
-				// 	}
-				// } else {
-				
-					// if( lmon.some((value) =>value==month) endday = 31;
-					// if( smon.some((value) =>value==month) endday = 30;
-					//是否为大月
-					// lmon.some((value) => {
-					// 	return value==month
-					// 	if (i === month) endday = 31;
-					// })
-					//是否为小月
-					// smon.forEach((i) => {
-					// 	if (i === month) endday = 30;
-					// })
-				// }
-				// this.month = month;
-				// // this.startdate = year +'-' +month+'-' +"1";
-				// this.startdate = "2000-1-1;"
-				// this.enddate = year + '-' + month + '-' + endday;
-			}
+			},
 
-			//切换月历
-			,
 			monthSwitch(res) {
 				// console.log(JSON.stringify(res))
-			}
+			},
 		},
 		mounted() {
-			// 设置日历日期
-			this.getdate();
+
 		}
 
 	}

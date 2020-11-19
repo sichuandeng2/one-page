@@ -49,7 +49,8 @@
 			this.storeManager();
 		},
 		methods: {
-			//退出事件
+
+			//  退出事件
 			exit() {
 				uni.showModal({
 					content: "确定退出吗？",
@@ -63,18 +64,21 @@
 					}
 				})
 			},
-			//定位事件
+
+			//  定位事件
 			position() {
 				uni.navigateTo({
 					url: '../set/map'
 				})
 			},
-			//检查当前用户是否具有门店定位的权限
+
+			//  检查当前用户是否具有门店定位的权限
 			storeManager(){
 				let parameter={
 					no:this.user.username
 				}
-				// 获取打卡范围
+
+				//  获取打卡范围
 				request.get('/api/v1/storeManager/menuShowToManager', parameter).then(res => {
 					if (res.code == '0') {
 						if (res.data) {

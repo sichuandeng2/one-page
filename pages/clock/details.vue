@@ -63,6 +63,8 @@
 <script>
 export default{
 	onLoad() {
+		
+		//  获取用户信息
 		this.user = uni.getStorageSync('user');
 		if (!this.user) {
 			uni.clearStorageSync('token');
@@ -75,6 +77,8 @@ export default{
 	}
 	,data(){
 		return{
+			
+			//  用户信息
 			user:{}
 		}
 	}

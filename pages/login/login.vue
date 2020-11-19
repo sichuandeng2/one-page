@@ -45,13 +45,23 @@
 	export default {
 		data() {
 			return {
+
+				//  progamer
 				title: "app",
+
+				//  用户名
 				username: '',
+
+				//  密码
 				password: ''
 			}
 		},
 		onLoad() {
+			
+			//  获取token地址
 			let token = uni.getStorageSync('token');
+
+			//  自动登录
 			if (token) {
 				uni.reLaunch({
 					url: '../index/index'
@@ -59,6 +69,8 @@
 			}
 		},
 		methods: {
+			
+			//  登录
 			login() {
 				uni.showLoading({
 				    title: '加载中'
@@ -77,19 +89,24 @@
 					})
 					return;
 				}
+
+				//  请求参数
 				var params = {
 					username: this.username,
 					password: this.password
 				}
+
 				//发送登录请求
 				request.post('/api/v1/login/login', params).then(res => {
-					uni.hideLoading(); //取消加载
+
+					//取消加载
+					uni.hideLoading(); 
 					if (res.code == 0) {
-						// 本地存储token信息
+						//  本地存储token信息
 						uni.setStorageSync('token', res.data.token);
-						// 本地存储user信息
+						//  本地存储user信息
 						uni.setStorageSync('user', res.data.user);
-						// 跳转至app首页
+						//  跳转至app首页
 						uni.reLaunch({
 							url: '../index/index'
 						})
@@ -106,7 +123,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	//整体页面配置
 	page {
 		background-color: #FFFFFF;

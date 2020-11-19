@@ -56,6 +56,8 @@
 <script>
 	export default {
 		onLoad() {
+			
+			//  加载用户信息
 			this.user = uni.getStorageSync('user');
 			if (!this.user) {
 				uni.clearStorageSync('token');
@@ -68,15 +70,15 @@
 		},
 		data() {
 			return {
+				
+				//  用户数据
 				user: {},
+				
+				//  打卡距离
 				distance:100
 				
 			}
 		},
-		mounted() {
-			
-		},
-
 	}
 </script>
 

@@ -15,28 +15,25 @@
 </template>
 
 <script>
+	//  加载图标
 	import uniIcons from "~@/../../components/uni-icons/uni-icons.vue";
 	
 	export default{
 		components:{uniIcons},
 		name:"setitem"
 		,props:{
+			
+			//  设置标题
 			title:{
 				type:String,
 				value:"test",
 			},
+			
+			//  设置信息
 			itemtext:{
 				type:String,
 				value:"test"
 			},
-		}
-		,data(){
-			return{
-				
-			}
-		}
-		,methods:{
-			
 		}
 	}
 </script>

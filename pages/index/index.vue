@@ -32,23 +32,44 @@
 
 <script>
 	import request from '@/utils/request.js'
-	var timeInterval; //时间定时器
-	var locationInterval; //地址定时器
+	
+	//  时间定时器
+	var timeInterval; 
+
+	//  地址定时器
+	var locationInterval; 
 	export default {
-		data() {
+		data () {
 			return {
-				flag: false, //打卡开关
-				user: {}, //登录数据
-				now: "", //当前时间
-				startWork: null, //开始打卡时间
-				afterWork: null, //结束打卡时间
-				latitude: "", //纬度
-				longitude: "", //经度
-				localAdress: "", //当地地址
+
+				//  打卡开关
+				flag: false, 
+
+				//  登录数据
+				user: {}, 
+
+				//  当前时间
+				now: "", 
+
+				//  开始打卡时间
+				startWork: null,
+				
+				//  结束打卡时间
+				afterWork: null,
+
+				//  纬度
+				latitude: "", 
+
+				//  经度
+				longitude: "", 
+
+				// 当地地址
+				localAdress: "",
 			}
 		},
-		onLoad() {
-			
+		onLoad () {
+
+			//  获取用户信息
 			this.user = uni.getStorageSync('user');
 			if (!this.user) {
 				uni.clearStorageSync('token');
@@ -57,21 +78,25 @@
 					url: '../login/login'
 				})
 			}
+
 			this.getTime();
 			this.getLocation();
 			timeInterval = setInterval(this.getTime, 1000);
 			locationInterval = setInterval(this.getLocation, 5000);
 		},
-		onUnload() {
+		onUnload () {
 			clearInterval(timeInterval);
 			clearInterval(locationInterval);
 		},
 		methods: {
+
 			// 获取定位
 			getLocation() {
 				uni.getLocation({
-					type: "gcj02", //国测局坐标
-					geocode: true, //允许解析
+					//  国测局坐标
+					type: "gcj02", 
+					//  允许解析
+					geocode: true, 
 					success: (res) => {
 						this.localAdress = res.address.poiName;
 						this.longitude = res.longitude;
@@ -81,18 +106,19 @@
 							longitude: this.longitude,
 							latitude: this.latitude
 						}
+
 						// 获取打卡范围
 						request.get('/api/v1/employeePunchInOut/checkDistance', parameter).then(res => {
 							if (res.code == '0') {
 								if (res.data.gap > res.data.distance) {
-									//设定打卡限制,不能打卡
+									//  设定打卡限制,不能打卡
 									this.flag = false
 								} else {
-									//解除打卡限制,允许打卡
+									//  解除打卡限制,允许打卡
 									this.flag = true
 								}
 							} else {
-								//设定打卡限制,不能打卡
+								//  设定打卡限制,不能打卡
 								this.flag = false
 							}
 						})
@@ -100,7 +126,7 @@
 				});
 			},
 
-			//获取时间
+			//  获取时间
 			getTime() {
 				var date = new Date();
 				var hour = date.getHours();
@@ -112,20 +138,22 @@
 				this.now = hour + " : " + minute + " : " + second;
 			},
 
-			// 打卡事件
+			//  打卡事件
 			clock() {
-				//判断当前打卡是否允许
+				//  判断当前打卡是否允许
 				if (this.flag) {
-					//配置请求参数
+					//  配置请求参数
 					let parameter = {
-						no: this.user.username, //员工工号
-						longitude: this.longitude, //经度
-						latitude: this.latitude //纬度
+						no: this.user.username,    //  员工工号
+						longitude: this.longitude, //  经度
+						latitude: this.latitude    //  纬度
 					}
 
 					request.postJSON('/api/v1/employeePunchInOut/clock', parameter)
 						.then(res => {
-							if (res.code == 0) { //提交成功
+
+							//  提交成功
+							if (res.code == 0) { 
 								uni.navigateTo({
 									url: '../clock/clockResult?time=' + this.now
 								})
@@ -154,7 +182,7 @@
 	}
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 	.clock-page {
 		display: flex;
 		flex-direction: column;

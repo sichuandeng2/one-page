@@ -1,8 +1,9 @@
 import Vue from 'vue'
 import App from './App'
-
 import uniIcons from "~@/../components/uni-icons/uni-icons.vue"; 
-Vue.component("uniIcons",uniIcons);//字体图标挂载
+
+//  字体图标挂载
+Vue.component("uniIcons",uniIcons);
 
 
 Vue.config.productionTip = false

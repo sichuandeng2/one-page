@@ -29,10 +29,14 @@
 	export default {
 		data() {
 			return {
+				
+				//  打卡时间
 				time: ''
 			}
 		},
 		methods: {
+			
+			//  打卡详情
 			details() {
 				uni.navigateTo({
 					url: "details"
@@ -41,12 +45,6 @@
 		},
 		onLoad: function(param) {
 			this.time = param.time;
-		},
-		onShow() {
-
-		},
-		mounted() {
-
 		}
 	}
 </script>
@@ -82,13 +80,6 @@
 			margin: 0 auto;
 			width: 99%;
 			height: 850rpx;
-
-			image {
-				// margin-top: 120rpx;
-				// width: 100%;
-				// height: 850rpx;
-
-			}
 		}
 
 		.clock-page-foot {
@@ -101,8 +92,6 @@
 
 			.clock-page-foot-result {
 				width: 25%;
-				// background-color: #D3D3D3;
-				// border-right: 1rpx groove #2C405A;
 			}
 
 			.clock-page-foot-share {

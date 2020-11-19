@@ -30,13 +30,16 @@
 	var locatioMark = null;
 	export default {
 		data() {
-			return {
-				//用户信息
+			return {	
+				//  用户信息
 				user: {},
-				//地址信息
-				latitude: null, //纬度
-				longitude: null, //经度
-				localAdress: "当前地址获取失败", //当地名称
+				//  纬度
+				latitude: null,   
+				//  经度
+				longitude: null,  
+				//  当地名称
+				localAdress: "当前地址获取失败", 
+				
 				//标记地图
 				mark: [{
 					latitude: 1,
@@ -46,7 +49,8 @@
 						content: "当前位置"
 					}
 				}],
-				// 画圆
+				
+				//  打卡范围
 				circles: [{
 					latitude: null,
 					longitude: null,
@@ -62,6 +66,7 @@
 			this.getData();
 		},
 		methods: {
+			
 			//获取地址事件
 			getLocation: function() {
 				uni.getLocation({
@@ -76,6 +81,7 @@
 						this.circles[0].latitude = res.latitude;
 						this.circles[0].longitude = res.longitude;
 					},
+					
 					//获取地址失败
 					fail: (res) => {
 						console.log("地址获取失败");
@@ -87,6 +93,8 @@
 					}
 				});
 			},
+			
+			//  获取打卡范围
 			getData() {
 				request.get('/api/v1/storePositionConfig/getPosition', {
 					userNo: this.user.username
@@ -94,9 +102,11 @@
 					this.circles[0].radius = res.data.distance;
 				})
 			},
-			//门店定位事件
+			
+			//  门店定位事件
 			commit() {
-				//非空验证
+				
+				//  非空验证
 				if(this.circles[0].radius==null ||this.circles[0].radius=="")
 				{
 					uni.showToast({
@@ -105,31 +115,33 @@
 					})
 					return;
 				}
-				//配置定位参数
+				
+				//   配置定位参数
 				let positionParams = {
 					userNo: this.user.username, //员工工号
 					longitude: this.longitude, //经度
 					latitude: this.latitude, //纬度
 					distance: this.circles[0].radius
 				}
-				//发送位置请求
+				
+				//  发送位置请求
 				request.post('/api/v1/storePositionConfig/setStoreJW', positionParams)
-					.then(res => {
-						if (res.code == 0) {
-							uni.showToast({
-								title: '提交成功',
-								icon: 'none'
-							})
-							setTimeout(() => {
-								uni.navigateBack({})
-							}, 1500)
-						} else {
-							uni.showToast({
-								title: res.msg,
-								icon: "none"
-							})
-						}
-					})
+				.then(res => {
+					if (res.code == 0) {
+						uni.showToast({
+							title: '提交成功',
+							icon: 'none'
+						})
+						setTimeout(() => {
+							uni.navigateBack({})
+						}, 1500)
+					} else {
+						uni.showToast({
+							title: res.msg,
+							icon: "none"
+						})
+					}
+				})
 			}
 		}
 	}
